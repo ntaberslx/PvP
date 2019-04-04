@@ -8,3 +8,6 @@
     background-color: #E5D4CE;
     border: solid 1px #7A6563;
 }
+.react-grid-item.react-grid-placeholder {
+    background: #DE6E4B !important;
+}

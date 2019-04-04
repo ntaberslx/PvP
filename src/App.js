@@ -160,9 +160,10 @@ class App extends Component {
                         // and set `measureBeforeMount={true}`.
                         useCSSTransforms={this.state.mounted}
                         compactType={this.state.compactType}
-                        preventCollision={!this.state.compactType}
-                    >
+                        preventCollision={!this.state.compactType}>
+
                         {this.generateDOM()}
+
                     </ResponsiveReactGridLayout>
                 </div>
 
