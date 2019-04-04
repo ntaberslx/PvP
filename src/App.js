@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 
 import './App.css';
 import 'react-widgets/dist/css/react-widgets.css';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
+
+import _ from 'lodash';
+import uuid from 'uuid';
+import DropdownList from 'react-widgets/lib/DropdownList';
+import { Responsive, WidthProvider } from "react-grid-layout";
 
 import Background from './components/Background';
 import BigStats from './components/BigStats';
@@ -15,20 +22,73 @@ import TextBox from './components/TextBox';
 import Weapon from './components/Weapon';
 import Encounter from './components/Encounter'
 
-import uuid from 'uuid';
-import DropdownList from 'react-widgets/lib/DropdownList';
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 let options = [
     'Background', 'BigStats', 'Encumbrance', 'Personality', 'Portrait',
     'SmallStats', 'Spellbook', 'State', 'TextBox', 'Weapon', 'Encounter'
 ];
 
+function generateLayout() {
+    return _.map(_.range(0, 25), function(item, i) {
+        const y = Math.ceil(Math.random() * 4) + 1;
+        return {
+            x: (_.random(0, 5) * 2) % 12,
+            y: Math.floor(i / 6) * y,
+            w: 2,
+            h: y,
+            i: i.toString(),
+            static: Math.random() < 0.05
+        };
+    });
+}
 
 class App extends Component {
+    static defaultProps = {
+        className: "layout",
+        rowHeight: 30,
+        onLayoutChange: function() {},
+        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+        initialLayout: generateLayout()
+    };
+
     state = {
         components: [],
-        value: null
+        value: null,
+        currentBreakpoint: "lg",
+        compactType: "vertical",
+        mounted: false,
+        layouts: { lg: this.props.initialLayout }
     };
+
+    onBreakpointChange = breakpoint => {
+        this.setState({
+            currentBreakpoint: breakpoint
+        });
+    };
+
+    onCompactTypeChange = () => {
+        const { compactType: oldCompactType } = this.state;
+        const compactType =
+            oldCompactType === "horizontal"
+                ? "vertical"
+                : oldCompactType === "vertical" ? null : "horizontal";
+        this.setState({ compactType });
+    };
+
+    onLayoutChange = (layout, layouts) => {
+        this.props.onLayoutChange(layout, layouts);
+    };
+
+    onNewLayout = () => {
+        this.setState({
+            layouts: { lg: generateLayout() }
+        });
+    };
+
+    componentDidMount() {
+        this.setState({ mounted: true });
+    }
 
     getType = (Type) => {
         console.log(Type);
@@ -44,6 +104,26 @@ class App extends Component {
         if (Type === 'Weapon') return {id: uuid.v4(), comp: <Weapon/>};
         if (Type === 'Encounter') return {id: uuid.v4(), comp: <Encounter/>};
     };
+
+    generateDOM() {
+        return _.map(this.state.layouts.lg, function(l, i) {
+            return (
+                <div key={i} className={l.static ? "static" : ""}>
+                    {l.static ? (
+                        <span
+                            className="text"
+                            title="This item is static and cannot be removed or resized."
+                        >
+                            Static - {i}
+                        </span>
+                    ) : (
+                        <span className="text">{i}</span>
+                    )}
+                </div>
+            );
+        });
+    }
+
 
     render() {
         return (
@@ -68,10 +148,22 @@ class App extends Component {
                     />
                 </header>
 
-                <div className="canvas">
-                    {this.state.components.map(function(comp, index){
-                        return <span key={ index }>{comp.comp}</span>;
-                    })}
+                <div>
+                    <ResponsiveReactGridLayout
+                        {...this.props}
+                        layouts={this.state.layouts}
+                        onBreakpointChange={this.onBreakpointChange}
+                        onLayoutChange={this.onLayoutChange}
+                        // WidthProvider option
+                        measureBeforeMount={false}
+                        // I like to have it animate on mount. If you don't, delete `useCSSTransforms` (it's default `true`)
+                        // and set `measureBeforeMount={true}`.
+                        useCSSTransforms={this.state.mounted}
+                        compactType={this.state.compactType}
+                        preventCollision={!this.state.compactType}
+                    >
+                        {this.generateDOM()}
+                    </ResponsiveReactGridLayout>
                 </div>
 
 
