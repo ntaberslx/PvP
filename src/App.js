@@ -24,7 +24,7 @@ import Encounter from './components/Encounter'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-let options = [
+const options = [
     'Background', 'BigStats', 'Encumbrance', 'Personality', 'Portrait',
     'SmallStats', 'Spellbook', 'State', 'TextBox', 'Weapon', 'Encounter'
 ];
@@ -53,12 +53,13 @@ class App extends Component {
     };
 
     state = {
-        components: [],
         value: null,
         currentBreakpoint: "lg",
         compactType: "vertical",
         mounted: false,
-        layouts: { lg: this.props.initialLayout }
+        layouts: {
+            lg: []
+        }
     };
 
     onBreakpointChange = breakpoint => {
@@ -92,38 +93,83 @@ class App extends Component {
 
     getType = (Type) => {
         console.log(Type);
-        if (Type === 'Background') return {id: uuid.v4(), comp: <Background/>};
-        if (Type === 'BigStats') return {id: uuid.v4(), comp: <BigStats/>};
-        if (Type === 'Encumbrance') return {id: uuid.v4(), comp: <Encumbrance/>};
-        if (Type === 'Personality') return {id: uuid.v4(), comp: <Personality/>};
-        if (Type === 'Portrait') return {id: uuid.v4(), comp: <Portrait/>};
-        if (Type === 'SmallStats') return {id: uuid.v4(), comp: <SmallStats/>};
-        if (Type === 'Spellbook') return {id: uuid.v4(), comp: <Spellbook/>};
-        if (Type === 'State') return {id: uuid.v4(), comp: <State/>};
-        if (Type === 'TextBox') return {id: uuid.v4(), comp: <TextBox/>};
-        if (Type === 'Weapon') return {id: uuid.v4(), comp: <Weapon/>};
-        if (Type === 'Encounter') return {id: uuid.v4(), comp: <Encounter/>};
+        if (Type === 'Background') return {
+            i: uuid.v4(),
+            comp: <Background/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'BigStats') return {
+            i: uuid.v4(),
+            comp: <BigStats/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'Encumbrance') return {
+            i: uuid.v4(),
+            comp: <Encumbrance/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'Personality') return {
+            i: uuid.v4(),
+            comp: <Personality/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'Portrait') return {
+            i: uuid.v4(),
+            comp: <Portrait/>,
+            x: 0, y: 0,
+            w: 2, h: 5
+        };
+        if (Type === 'SmallStats') return {
+            i: uuid.v4(),
+            comp: <SmallStats/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'Spellbook') return {
+            i: uuid.v4(),
+            comp: <Spellbook/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'State') return {
+            i: uuid.v4(),
+            comp: <State/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'TextBox') return {
+            i: uuid.v4(),
+            comp: <TextBox/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'Weapon') return {
+            i: uuid.v4(),
+            comp: <Weapon/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
+        if (Type === 'Encounter') return {
+            i: uuid.v4(),
+            comp: <Encounter/>,
+            x: 0, y: 0,
+            w: 3, h: 2
+        };
     };
 
     generateDOM() {
-        return _.map(this.state.layouts.lg, function(l, i) {
+        return _.map(this.state.layouts.lg, (l, i) => {
             return (
-                <div key={i} className={l.static ? "static" : ""}>
-                    {l.static ? (
-                        <span
-                            className="text"
-                            title="This item is static and cannot be removed or resized."
-                        >
-                            Static - {i}
-                        </span>
-                    ) : (
-                        <span className="text">{i}</span>
-                    )}
+                <div key={l.i}>
+                    {l.comp}
                 </div>
             );
         });
     }
-
 
     render() {
         return (
@@ -136,16 +182,28 @@ class App extends Component {
 
 
                 <header className="App-header">
-                    <h1>
-                        Pencil Variegate Paper (PvP) WIP
-                    </h1>
-                    <DropdownList
-                        data={options}
-                        value={this.state.value}
-                        onChange={value => this.setState({
-                            components: [...this.state.components, this.getType(value)]
-                        })}
-                    />
+                    <div className="row">
+                        <div className="col-md-6">
+                            <h2>
+                                Pencil Variegate Paper (PvP) WIP
+                            </h2>
+                        </div>
+                        <div className="col-md-6">
+                            <DropdownList
+                                data={options}
+                                value={this.state.value}
+                                placeholder="Add Components Here"
+                                onChange={value => {
+                                    this.setState({
+                                        layouts: {
+                                            lg: [...this.state.layouts.lg, this.getType(value)]
+                                        }});
+                                    value = null;
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <hr/>
                 </header>
 
                 <div>
@@ -154,10 +212,7 @@ class App extends Component {
                         layouts={this.state.layouts}
                         onBreakpointChange={this.onBreakpointChange}
                         onLayoutChange={this.onLayoutChange}
-                        // WidthProvider option
                         measureBeforeMount={false}
-                        // I like to have it animate on mount. If you don't, delete `useCSSTransforms` (it's default `true`)
-                        // and set `measureBeforeMount={true}`.
                         useCSSTransforms={this.state.mounted}
                         compactType={this.state.compactType}
                         preventCollision={!this.state.compactType}>
