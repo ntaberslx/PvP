@@ -5,9 +5,16 @@
     height: 100vh
 }
 .react-grid-item {
-    background-color: #E5D4CE;
-    border: solid 1px #7A6563;
+    background-color: #B26E63;
+    border: solid 1px #654C4F;
 }
 .react-grid-item.react-grid-placeholder {
     background: #DE6E4B !important;
+}
+
+.app-header {
+    background-color: #7B6D8D;
+}
+.header {
+    color: #A5C4D4;
 }

@@ -23,7 +23,7 @@ class App extends Component {
     static defaultProps = {
         className: "layout",
         rowHeight: 30,
-        onLayoutChange: function() {},
+        onLayoutChange: layout => { console.log(layout); },
         cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
     };
 
@@ -57,9 +57,7 @@ class App extends Component {
     };
 
     componentDidMount() {
-        this.setState({ mounted: true });
         const storage = localStorage.getItem('PvPLayouts');
-        console.log(JSON.parse(storage));
         if (storage) {
             this.setState({layouts: JSON.parse(storage)});
         }
@@ -70,7 +68,6 @@ class App extends Component {
     }
 
     getType = (Type) => {
-        console.log(Type);
         return {
             i: uuid.v4(),
             data: {},
@@ -107,11 +104,10 @@ class App extends Component {
                       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                       crossOrigin="anonymous"/>
 
-
-                <header className="App-header">
+                <header className="app-header">
                     <div className="row">
                         <div className="col-md-6">
-                            <h2>
+                            <h2 className="header">
                                 Pencil Variegate Paper (PvP) WIP
                             </h2>
                         </div>
