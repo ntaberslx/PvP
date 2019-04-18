@@ -10,17 +10,7 @@ import uuid from 'uuid';
 import DropdownList from 'react-widgets/lib/DropdownList';
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import Background from './components/Background';
-import BigStats from './components/BigStats';
-import Encumbrance from './components/Encumbrance';
-import Personality from './components/Personality';
-import Portrait from './components/Portrait';
-import SmallStats from './components/SmallStats';
-import Spellbook from './components/Spellbook';
-import State from './components/State';
-import TextBox from './components/TextBox';
-import Weapon from './components/Weapon';
-import Encounter from './components/Encounter'
+import Master from './components/Master';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -68,73 +58,23 @@ class App extends Component {
 
     componentDidMount() {
         this.setState({ mounted: true });
+        const storage = localStorage.getItem('PvPLayouts');
+        console.log(JSON.parse(storage));
+        if (storage) {
+            this.setState({layouts: JSON.parse(storage)});
+        }
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem('PvPLayouts', JSON.stringify(this.state.layouts));
     }
 
     getType = (Type) => {
         console.log(Type);
-        if (Type === 'Background') return {
+        return {
             i: uuid.v4(),
-            comp: <Background/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'BigStats') return {
-            i: uuid.v4(),
-            comp: <BigStats/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'Encumbrance') return {
-            i: uuid.v4(),
-            comp: <Encumbrance/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'Personality') return {
-            i: uuid.v4(),
-            comp: <Personality/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'Portrait') return {
-            i: uuid.v4(),
-            comp: <Portrait/>,
-            x: 0, y: 0,
-            w: 2, h: 5
-        };
-        if (Type === 'SmallStats') return {
-            i: uuid.v4(),
-            comp: <SmallStats/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'Spellbook') return {
-            i: uuid.v4(),
-            comp: <Spellbook/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'State') return {
-            i: uuid.v4(),
-            comp: <State/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'TextBox') return {
-            i: uuid.v4(),
-            comp: <TextBox/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'Weapon') return {
-            i: uuid.v4(),
-            comp: <Weapon/>,
-            x: 0, y: 0,
-            w: 3, h: 2
-        };
-        if (Type === 'Encounter') return {
-            i: uuid.v4(),
-            comp: <Encounter/>,
+            data: {},
+            type: Type,
             x: 0, y: 0,
             w: 3, h: 2
         };
@@ -144,7 +84,7 @@ class App extends Component {
         return _.map(this.state.layouts.lg, (l, i) => {
             return (
                 <div key={l.i}>
-                    {l.comp}
+                    <Master type={l.type} data={l.data}/>
                 </div>
             );
         });
@@ -156,10 +96,6 @@ class App extends Component {
                 lg: [...this.state.layouts.lg, this.getType(value)]
             }});
         value = null;
-    }
-
-    componentDidUpdate() {
-        localStorage.setItem('PvPLayouts', JSON.stringify(this.state.layouts));
     }
 
     render() {
