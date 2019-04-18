@@ -29,27 +29,12 @@ const options = [
     'SmallStats', 'Spellbook', 'State', 'TextBox', 'Weapon', 'Encounter'
 ];
 
-function generateLayout() {
-    return _.map(_.range(0, 25), function(item, i) {
-        const y = Math.ceil(Math.random() * 4) + 1;
-        return {
-            x: (_.random(0, 5) * 2) % 12,
-            y: Math.floor(i / 6) * y,
-            w: 2,
-            h: y,
-            i: i.toString(),
-            static: Math.random() < 0.05
-        };
-    });
-}
-
 class App extends Component {
     static defaultProps = {
         className: "layout",
         rowHeight: 30,
         onLayoutChange: function() {},
-        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-        initialLayout: generateLayout()
+        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
     };
 
     state = {
@@ -79,12 +64,6 @@ class App extends Component {
 
     onLayoutChange = (layout, layouts) => {
         this.props.onLayoutChange(layout, layouts);
-    };
-
-    onNewLayout = () => {
-        this.setState({
-            layouts: { lg: generateLayout() }
-        });
     };
 
     componentDidMount() {
@@ -171,6 +150,18 @@ class App extends Component {
         });
     }
 
+    addComponent(value) {
+        this.setState({
+            layouts: {
+                lg: [...this.state.layouts.lg, this.getType(value)]
+            }});
+        value = null;
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem('PvPLayouts', JSON.stringify(this.state.layouts));
+    }
+
     render() {
         return (
             <div className="App">
@@ -193,13 +184,7 @@ class App extends Component {
                                 data={options}
                                 value={this.state.value}
                                 placeholder="Add Components Here"
-                                onChange={value => {
-                                    this.setState({
-                                        layouts: {
-                                            lg: [...this.state.layouts.lg, this.getType(value)]
-                                        }});
-                                    value = null;
-                                }}
+                                onChange={value => this.addComponent(value)}
                             />
                         </div>
                     </div>
@@ -221,8 +206,6 @@ class App extends Component {
 
                     </ResponsiveReactGridLayout>
                 </div>
-
-
             </div>
         );
     }
