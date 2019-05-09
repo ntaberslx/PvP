@@ -20,29 +20,25 @@ const options = [
 ];
 
 class App extends Component {
-    static defaultProps = {
-        className: "layout",
-        rowHeight: 30,
-        onLayoutChange: layout => { console.log(layout); },
-        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
-    };
+	constructor(props) {
+		super(props);
+
+		const storage = getFromLS('layouts');
+		if (storage) {
+			this.state = {layouts: storage};
+		} else {
+			this.state = {layouts: {lg:[]}};
+		}
+	}
 
     state = {
         value: null,
         currentBreakpoint: "lg",
         compactType: "vertical",
-        mounted: false,
-        layouts: {
-            lg: []
-        }
+        mounted: false
     };
 
-    onBreakpointChange = breakpoint => {
-        this.setState({
-            currentBreakpoint: breakpoint
-        });
-    };
-
+    /* is this for vert/hori changes? */
     onCompactTypeChange = () => {
         const { compactType: oldCompactType } = this.state;
         const compactType =
@@ -52,19 +48,13 @@ class App extends Component {
         this.setState({ compactType });
     };
 
-    onLayoutChange = (layout, layouts) => {
-        this.props.onLayoutChange(layout, layouts);
-    };
-
-    componentDidMount() {
-        const storage = localStorage.getItem('PvPLayouts');
-        if (storage) {
-            this.setState({layouts: JSON.parse(storage)});
-        }
-    }
+    onChange = (layout, layouts) => {
+		saveToLS("layouts", layouts);
+        this.setState({layouts});
+	};
 
     componentDidUpdate() {
-        localStorage.setItem('PvPLayouts', JSON.stringify(this.state.layouts));
+		saveToLS("layouts", this.state.layouts);
     }
 
     getType = (Type) => {
@@ -77,7 +67,7 @@ class App extends Component {
         };
     };
 
-    generateDOM() {
+    generateDOM(layout) {
         return _.map(this.state.layouts.lg, (l, i) => {
             return (
                 <div key={l.i}>
@@ -125,22 +115,43 @@ class App extends Component {
 
                 <div>
                     <ResponsiveReactGridLayout
-                        {...this.props}
                         layouts={this.state.layouts}
-                        onBreakpointChange={this.onBreakpointChange}
-                        onLayoutChange={this.onLayoutChange}
-                        measureBeforeMount={false}
-                        useCSSTransforms={this.state.mounted}
+						cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+                        onLayoutChange={this.onChange}
+						onCompactTypeChange={this.onCompactTypeChange}
                         compactType={this.state.compactType}
-                        preventCollision={!this.state.compactType}>
+						verticalCompact={false}>
 
-                        {this.generateDOM()}
+                        {this.generateDOM("lg")}
 
                     </ResponsiveReactGridLayout>
                 </div>
             </div>
         );
     }
+}
+
+function getFromLS(key) {
+	let ls = {};
+	if (global.localStorage) {
+		try {
+			ls = JSON.parse(global.localStorage.getItem("PvPLayouts")) || {};
+		} catch (e) {
+			/*Ignore*/
+		}
+	}
+	return ls[key];
+}
+
+function saveToLS(key, value) {
+	if (global.localStorage) {
+		global.localStorage.setItem(
+			"PvPLayouts",
+			JSON.stringify({
+				[key]: value
+			})
+		);
+	}
 }
 
 export default App;
