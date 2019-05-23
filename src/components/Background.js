@@ -8,15 +8,17 @@ library.add(faTimesCircle);
 
 
 class Background extends Component {
+	onChange = (data) => {this.props.handleChanges(data);};
+
 	render() {
 		return (
-			<div className="container-fluid">
-				<div className="row-fluid">
+			<div className="container">
+				<div className="row">
 					<div className="col-md-8">
 						This is a background component.
 					</div>
 					<div className="col-md-4">
-						<FontAwesomeIcon icon="times-circle" />
+						<FontAwesomeIcon icon="times-circle"/>
 					</div>
 
 				</div>

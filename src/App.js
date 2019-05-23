@@ -23,12 +23,13 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
-		const storage = getFromLS('layouts');
-		if (storage) {
-			this.state = {layouts: storage};
+		const storedData = getFromLS();
+		if (storedData.layouts && storedData.dataMap) {
+			this.state = {layouts: storedData.layouts, dataMap: storedData.dataMap};
 		} else {
-			this.state = {layouts: {lg:[]}};
+			this.state = {layouts: {lg:[]}, dataMap: {lg:[]}};
 		}
+		this.generateDOM = this.generateDOM.bind(this);
 	}
 
     state = {
@@ -48,41 +49,67 @@ class App extends Component {
         this.setState({ compactType });
     };
 
+    getDataMapVal = (id) => {
+    	// this is real ugly. want an easier way to get it.
+		for (let d of this.state.dataMap.lg){
+			if (d.i === id) {
+				return d;
+			}
+		}
+	};
+
     onChange = (layout, layouts) => {
-		saveToLS("layouts", layouts);
-        this.setState({layouts});
+		this.setState({layouts});
+		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
+	};
+
+    onChildDataChange = (data) => {
+    	console.log(data);
+		for (let d of this.state.dataMap.lg) {
+			if (d.i === data.i) {
+				d = data;
+			}
+		}
 	};
 
     componentDidUpdate() {
-		saveToLS("layouts", this.state.layouts);
+		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
     }
 
-    getType = (Type) => {
+    getNewMaster = () => {
         return {
             i: uuid.v4(),
-            data: {},
-            type: Type,
             x: 0, y: 0,
             w: 3, h: 2
         };
     };
 
+	addComponent(value) {
+		const master = this.getNewMaster();
+		this.setState({
+			layouts: {
+				lg: [...this.state.layouts.lg, master]
+			},
+			dataMap: {
+				lg: [...this.state.dataMap.lg, {
+					data: {},
+					type: value,
+					i: master.i
+				}]
+			}}
+		);
+	}
+
     generateDOM(layout) {
         return _.map(this.state.layouts.lg, (l, i) => {
+			let data = this.getDataMapVal(l.i);
+			console.log(l.i, data);
             return (
                 <div key={l.i}>
-                    <Master type={l.type} data={l.data}/>
+                    <Master type={data.type} data={data.data} handleChanges={this.onChildDataChange.bind(this)}/>
                 </div>
             );
         });
-    }
-
-    addComponent(value) {
-        this.setState({
-            layouts: {
-                lg: [...this.state.layouts.lg, this.getType(value)]
-            }});
-        value = null;
     }
 
     render() {
@@ -118,9 +145,7 @@ class App extends Component {
                         layouts={this.state.layouts}
 						cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
                         onLayoutChange={this.onChange}
-						onCompactTypeChange={this.onCompactTypeChange}
-                        compactType={this.state.compactType}
-						verticalCompact={false}>
+                        compactType={null}>
 
                         {this.generateDOM("lg")}
 
@@ -131,25 +156,23 @@ class App extends Component {
     }
 }
 
-function getFromLS(key) {
+function getFromLS() {
 	let ls = {};
 	if (global.localStorage) {
 		try {
-			ls = JSON.parse(global.localStorage.getItem("PvPLayouts")) || {};
+			ls = JSON.parse(global.localStorage.getItem("PvP")) || {};
 		} catch (e) {
 			/*Ignore*/
 		}
 	}
-	return ls[key];
+	return ls;
 }
 
-function saveToLS(key, value) {
+function saveToLS(values) {
 	if (global.localStorage) {
 		global.localStorage.setItem(
-			"PvPLayouts",
-			JSON.stringify({
-				[key]: value
-			})
+			"PvP",
+			JSON.stringify(values)
 		);
 	}
 }
