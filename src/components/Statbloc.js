@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Draggable from "react-draggable";
 
-class SmallStats extends Component {
+class Statbloc extends Component {
 	onChange = (data) => {this.props.handleChanges(data);};
 
 	render() {
@@ -15,4 +15,4 @@ class SmallStats extends Component {
 	}
 }
 
-export default SmallStats;
+export default Statbloc;

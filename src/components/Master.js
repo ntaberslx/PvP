@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
 import Background from '../components/Background';
-import BigStats from '../components/BigStats';
 import Encumbrance from '../components/Encumbrance';
 import Personality from '../components/Personality';
 import Portrait from '../components/Portrait';
-import SmallStats from '../components/SmallStats';
+import Statbloc from '../components/Statbloc';
 import Spellbook from '../components/Spellbook';
 import State from '../components/State';
 import TextBox from '../components/TextBox';
@@ -20,16 +19,14 @@ class Master extends Component {
 		const data = this.props.data;
 		if (type === 'Background')
 			return <Background data={data} handleChanges={this.onChange.bind(this)}/>;
-		if (type === 'BigStats')
-			return <BigStats data={data} handleChanges={this.onChange.bind(this)}/>;
 		if (type === 'Encumbrance')
 			return <Encumbrance data={data} handleChanges={this.onChange.bind(this)}/>;
 		if (type === 'Personality')
 			return <Personality data={data} handleChanges={this.onChange.bind(this)}/>;
 		if (type === 'Portrait')
 			return <Portrait data={data} handleChanges={this.onChange.bind(this)}/>;
-		if (type === 'SmallStats')
-			return <SmallStats data={data} handleChanges={this.onChange.bind(this)}/>;
+		if (type === 'Statbloc')
+			return <Statbloc data={data} handleChanges={this.onChange.bind(this)}/>;
 		if (type === 'Spellbook')
 			return <Spellbook data={data} handleChanges={this.onChange.bind(this)}/>;
 		if (type === 'State')
