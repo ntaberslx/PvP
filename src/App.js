@@ -51,6 +51,15 @@ class App extends Component {
         this.setState({ compactType });
     };*/
 
+	getLayoutVal = (id) => {
+		for (let d of this.state.layouts.lg){
+			if (d.i === id) {
+				console.log(d);
+				return d;
+			}
+		}
+	};
+
     getDataMapVal = (id) => {
 		for (let d of this.state.dataMap.lg){
 			if (d.i === id) {
@@ -73,7 +82,26 @@ class App extends Component {
 		}
 	};
 
-    componentDidUpdate() {
+	removeElement = (id) => {
+    	for (let i = 0; i < this.state.layouts.lg.length; i++) {
+    		const item = this.getLayoutVal(id);
+    		if (item) {
+				this.setState(prevState => {
+					return {
+						layouts: {
+							lg : [...prevState.layouts.lg.filter(({ i }) => i !== item.i)]
+						}
+					};
+				});
+			}
+		}
+	};
+
+    componentDidMount() {
+		document.title = "PvP";
+	}
+
+	componentDidUpdate() {
 		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
     }
 
@@ -93,7 +121,7 @@ class App extends Component {
 			},
 			dataMap: {
 				lg: [...this.state.dataMap.lg, {
-					data: {},
+					data: {id: master.i},
 					type: value,
 					i: master.i
 				}]
@@ -103,11 +131,10 @@ class App extends Component {
 
     generateDOM(layout) {
         return _.map(this.state.layouts.lg, (l, i) => {
-			let data = this.getDataMapVal(l.i);
-			console.log(l.i, data);
+			const data = this.getDataMapVal(l.i);
             return (
                 <div key={l.i}>
-                    <Master type={data.type} data={data.data} handleChanges={this.onChildDataChange.bind(this)}/>
+                    <Master type={data.type} data={data.data} handleChanges={this.onChildDataChange.bind(this)} removeElement={this.removeElement.bind(this)}/>
                 </div>
             );
         });
@@ -116,7 +143,6 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-
                 <link rel="stylesheet"
                       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"

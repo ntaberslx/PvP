@@ -14,29 +14,31 @@ import Encounter from '../components/Encounter'
 class Master extends Component {
 	onChange = (data) => {this.props.handleChanges(data);};
 
+	removeElement = (id) => {this.props.removeElement(id);};
+
 	getType() {
 		const type = this.props.type;
 		const data = this.props.data;
 		if (type === 'Background')
-			return <Background data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Background data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encumbrance')
-			return <Encumbrance data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Encumbrance data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Personality')
-			return <Personality data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Personality data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Portrait')
-			return <Portrait data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Portrait data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Statbloc')
-			return <Statbloc data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Statbloc data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Spellbook')
-			return <Spellbook data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Spellbook data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'State')
-			return <State data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <State data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'TextBox')
-			return <TextBox data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <TextBox data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Weapon')
-			return <Weapon data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Weapon data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encounter')
-			return <Encounter data={data} handleChanges={this.onChange.bind(this)}/>;
+			return <Encounter data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 	}
 	
 	render() {

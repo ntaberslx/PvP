@@ -16,7 +16,7 @@ class Background extends Component {
 
 	close = (event) => {
 		event.stopPropagation();
-		console.log('closing element');
+		this.props.removeElement(this.props.data.id);
 	};
 
 	render() {
@@ -26,8 +26,8 @@ class Background extends Component {
 					<div className={"col-md-10"}>
 						<h4>Background</h4>
 					</div>
-					<div className={"col-md-2"}>
-						<FontAwesomeIcon icon="times-circle" onMouseDown={(e) => this.close(e)}/>
+					<div className="col-md-2" onClick={this.close.bind(this)}>
+						&times;
 					</div>
 				</div>
 				<div className="row">
