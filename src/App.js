@@ -37,7 +37,8 @@ class App extends Component {
         currentBreakpoint: "lg",
         compactType: "vertical",
         mounted: false,
-		isDraggable: {state: false}
+		isDraggable: {state: false},
+		trash: []
     };
 
     /* is this for vert/hori changes?
@@ -56,16 +57,6 @@ class App extends Component {
 				return d;
 			}
 		}
-	};
-
-    onKeyDown = (e) => {
-    	if (e.keyCode === 17 && !this.state.isDraggable.state) this.state.isDraggable.state = true;
-    	console.log(this.state.isDraggable);
-	};
-
-    onKeyUp = (e) => {
-		if (e.keyCode === 17 && this.state.isDraggable.state) this.state.isDraggable.state = false;
-		console.log(this.state.isDraggable)
 	};
 
     onChange = (layout, layouts) => {
@@ -130,6 +121,13 @@ class App extends Component {
                       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                       crossOrigin="anonymous"/>
+				<link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png"/>
+				<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png"/>
+				<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png"/>
+				<link rel="manifest" href="/public/site.webmanifest"/>
+				<link rel="mask-icon" href="/public/safari-pinned-tab.svg" color="#5bbad5"/>
+				<meta name="msapplication-TileColor" content="#da532c"/>
+				<meta name="theme-color" content="#ffffff"/>
 
                 <header className="app-header">
                     <div className="row">
