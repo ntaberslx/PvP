@@ -8,7 +8,7 @@ import 'react-resizable/css/styles.css';
 import _ from 'lodash';
 import uuid from 'uuid';
 import DropdownList from 'react-widgets/lib/DropdownList';
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Responsive, WidthProvider} from "react-grid-layout";
 
 import Master from './components/Master';
 
@@ -25,9 +25,9 @@ class App extends Component {
 
 		const storedData = getFromLS();
 		if (storedData.layouts && storedData.dataMap) {
-			this.state = {layouts: storedData.layouts, dataMap: storedData.dataMap};
+			this.state = {layouts: storedData.layouts, dataMap: storedData.dataMap, isDraggable: {state: false}};
 		} else {
-			this.state = {layouts: {lg:[]}, dataMap: {lg:[]}};
+			this.state = {layouts: {lg:[]}, dataMap: {lg:[]}, isDraggable: {state: false}};
 		}
 		this.generateDOM = this.generateDOM.bind(this);
 	}
@@ -36,10 +36,11 @@ class App extends Component {
         value: null,
         currentBreakpoint: "lg",
         compactType: "vertical",
-        mounted: false
+        mounted: false,
+		isDraggable: {state: false}
     };
 
-    /* is this for vert/hori changes? */
+    /* is this for vert/hori changes?
     onCompactTypeChange = () => {
         const { compactType: oldCompactType } = this.state;
         const compactType =
@@ -47,15 +48,24 @@ class App extends Component {
                 ? "vertical"
                 : oldCompactType === "vertical" ? null : "horizontal";
         this.setState({ compactType });
-    };
+    };*/
 
     getDataMapVal = (id) => {
-    	// this is real ugly. want an easier way to get it.
 		for (let d of this.state.dataMap.lg){
 			if (d.i === id) {
 				return d;
 			}
 		}
+	};
+
+    onKeyDown = (e) => {
+    	if (e.keyCode === 17 && !this.state.isDraggable.state) this.state.isDraggable.state = true;
+    	console.log(this.state.isDraggable);
+	};
+
+    onKeyUp = (e) => {
+		if (e.keyCode === 17 && this.state.isDraggable.state) this.state.isDraggable.state = false;
+		console.log(this.state.isDraggable)
 	};
 
     onChange = (layout, layouts) => {
@@ -76,7 +86,7 @@ class App extends Component {
 		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
     }
 
-    getNewMaster = () => {
+    getNewMaster = (type) => {
         return {
             i: uuid.v4(),
             x: 0, y: 0,
@@ -85,7 +95,7 @@ class App extends Component {
     };
 
 	addComponent(value) {
-		const master = this.getNewMaster();
+		const master = this.getNewMaster(value);
 		this.setState({
 			layouts: {
 				lg: [...this.state.layouts.lg, master]
@@ -143,7 +153,9 @@ class App extends Component {
                 <div>
                     <ResponsiveReactGridLayout
                         layouts={this.state.layouts}
-						cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+						cols={{ lg: 100, md: 10, sm: 6, xs: 4, xxs: 2 }}
+						rowHeight={10}
+						preventCollision={true}
                         onLayoutChange={this.onChange}
                         compactType={null}>
 
