@@ -7,7 +7,7 @@ import 'react-resizable/css/styles.css';
 
 import _ from 'lodash';
 import uuid from 'uuid';
-import DropdownList from 'react-widgets/lib/DropdownList';
+import {Navbar, Nav, Dropdown} from 'react-bootstrap';
 import { Responsive, WidthProvider} from "react-grid-layout";
 
 import Master from './components/Master';
@@ -37,8 +37,7 @@ class App extends Component {
         value: null,
         currentBreakpoint: "lg",
         compactType: "vertical",
-        mounted: false,
-		trash: []
+        mounted: false
     };
 
 	getLayoutVal = (id) => {
@@ -157,24 +156,25 @@ class App extends Component {
 				<meta name="msapplication-TileColor" content="#da532c"/>
 				<meta name="theme-color" content="#ffffff"/>
 
-                <header className="app-header">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h2 className="header">
-                                Pencil Variegate Paper (PvP) WIP
-                            </h2>
-                        </div>
-                        <div className="col-md-6">
-                            <DropdownList
-                                data={options}
-                                value={this.state.value}
-                                placeholder="Add Components Here"
-                                onChange={value => this.addComponent(value)}
-                            />
-                        </div>
-                    </div>
-                    <hr/>
-                </header>
+				<Navbar bg={'dark'} variant={"dark"} expand="lg">
+					<Navbar.Brand href="#home">PvP (Don't Waste Paper)</Navbar.Brand>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Navbar.Collapse id="basic-navbar-nav">
+						<Nav className="mr-auto">
+							<Dropdown>
+								<Dropdown.Toggle variant="success" id="dropdown-basic">
+									Add
+								</Dropdown.Toggle>
+
+								<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
+									{options.map(i=>{
+										return <Dropdown.Item value={i}  onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
+									})}
+								</Dropdown.Menu>
+							</Dropdown>
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
 
                 <div>
                     <ResponsiveReactGridLayout

@@ -9,7 +9,7 @@ import Spellbook from '../components/Spellbook';
 import State from '../components/State';
 import TextBox from '../components/TextBox';
 import Weapon from '../components/Weapon';
-import Encounter from '../components/Encounter'
+import Encounter from '../components/Encounter';
 
 class Master extends Component {
 	handleChanges = (fields) => {
@@ -57,10 +57,10 @@ class Master extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className={"col-md-11"}>
+					<div className={"col-md-10"}>
 						<h4>{this.props.type}</h4>
 					</div>
-					<div className="col-md-1" onClick={this.close.bind(this)}>
+					<div className={"col-md-2"} onClick={this.close.bind(this)}>
 						&times;
 					</div>
 				</div>
