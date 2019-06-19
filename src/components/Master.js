@@ -10,6 +10,7 @@ import State from '../components/State';
 import TextBox from '../components/TextBox';
 import Weapon from '../components/Weapon';
 import Encounter from '../components/Encounter';
+import {Container, Row, Col} from 'react-bootstrap';
 
 class Master extends Component {
 	handleChanges = (fields) => {
@@ -53,19 +54,19 @@ class Master extends Component {
 	}
 	
 	render() {
-		
 		return (
-			<div className="container">
-				<div className="row">
-					<div className={"col-md-10"}>
+			<Container>
+				<Row>
+					<Col md={10}>
 						<h4>{this.props.type}</h4>
-					</div>
-					<div className={"col-md-2"} onClick={this.close.bind(this)}>
+					</Col>
+					<Col md={2} onClick={this.close.bind(this)}>
 						&times;
-					</div>
-				</div>
+					</Col>
+				</Row>
+
 				{this.getType()}
-			</div>
+			</Container>
 		);
 	}
 }
