@@ -25,9 +25,10 @@ class App extends Component {
 
 		const storedData = getFromLS();
 		if (storedData.layouts && storedData.dataMap) {
-			this.state = {layouts: storedData.layouts, dataMap: storedData.dataMap, isDraggable: {state: false}};
+			this.state = {layouts: storedData.layouts, dataMap: storedData.dataMap};
 		} else {
-			this.state = {layouts: {lg:[]}, dataMap: {lg:[]}, isDraggable: {state: false}};
+			this.state = {layouts: {lg:[]}, dataMap: {lg:[]}};
+			saveToLS({layouts: {lg:[]}, dataMap: {lg:[]}});
 		}
 		this.generateDOM = this.generateDOM.bind(this);
 	}
@@ -37,19 +38,8 @@ class App extends Component {
         currentBreakpoint: "lg",
         compactType: "vertical",
         mounted: false,
-		isDraggable: {state: false},
 		trash: []
     };
-
-    /* is this for vert/hori changes?
-    onCompactTypeChange = () => {
-        const { compactType: oldCompactType } = this.state;
-        const compactType =
-            oldCompactType === "horizontal"
-                ? "vertical"
-                : oldCompactType === "vertical" ? null : "horizontal";
-        this.setState({ compactType });
-    };*/
 
 	getLayoutVal = (id) => {
 		for (let d of this.state.layouts.lg){
@@ -62,7 +52,7 @@ class App extends Component {
 
     getDataMapVal = (id) => {
 		for (let d of this.state.dataMap.lg){
-			if (d.i === id) {
+			if (d.id === id) {
 				return d;
 			}
 		}
@@ -73,13 +63,20 @@ class App extends Component {
 		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
 	};
 
-    onChildDataChange = (data) => {
-    	console.log(data);
-		for (let d of this.state.dataMap.lg) {
-			if (d.i === data.i) {
-				d = data;
+    onChildDataChange = (newData) => {
+		const d = [...this.state.dataMap.lg];
+		for (let i = 0; i < d.length; i++) {
+			const data = d[i];
+			console.log(data, newData);
+			if (data.id === newData.id) {
+				d[i].fields = newData.fields;
 			}
 		}
+		this.setState({
+			dataMap: {
+				lg : d
+			}
+		});
 	};
 
 	removeElement = (id) => {
@@ -106,10 +103,15 @@ class App extends Component {
     }
 
     getNewMaster = (type) => {
+    	let x = 0; let y = 0;
+    	let w = 20; let h = 20;
+    	if (type === 'Background') {
+    		w = 20; h = 20;
+		} // else if ...
         return {
             i: uuid.v4(),
-            x: 0, y: 0,
-            w: 3, h: 2
+            x: x, y: y,
+            w: w, h: h
         };
     };
 
@@ -121,23 +123,23 @@ class App extends Component {
 			},
 			dataMap: {
 				lg: [...this.state.dataMap.lg, {
-					data: {id: master.i},
+					fields: {},
 					type: value,
-					i: master.i
+					id: master.i
 				}]
 			}}
 		);
 	}
 
     generateDOM(layout) {
-        return _.map(this.state.layouts.lg, (l, i) => {
+		return _.map(this.state.layouts.lg, (l, i) => {
 			const data = this.getDataMapVal(l.i);
-            return (
-                <div key={l.i}>
-                    <Master type={data.type} data={data.data} handleChanges={this.onChildDataChange.bind(this)} removeElement={this.removeElement.bind(this)}/>
-                </div>
-            );
-        });
+			return (
+				<div key={l.i}>
+					<Master type={data.type} fields={data.fields} id={data.id} handleChanges={this.onChildDataChange.bind(this)} removeElement={this.removeElement.bind(this)}/>
+				</div>
+			);
+		});
     }
 
     render() {

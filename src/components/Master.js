@@ -12,33 +12,39 @@ import Weapon from '../components/Weapon';
 import Encounter from '../components/Encounter'
 
 class Master extends Component {
-	onChange = (data) => {this.props.handleChanges(data);};
+	handleChanges = (fields) => {
+		const ext = {
+			id: this.props.id,
+			type: this.props.type,
+			fields
+		};
+		this.props.handleChanges(ext);
+	};
 
 	removeElement = (id) => {this.props.removeElement(id);};
 
 	getType() {
 		const type = this.props.type;
-		const data = this.props.data;
 		if (type === 'Background')
-			return <Background data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Background fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encumbrance')
-			return <Encumbrance data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Encumbrance fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Personality')
-			return <Personality data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Personality fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Portrait')
-			return <Portrait data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Portrait fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Statbloc')
-			return <Statbloc data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Statbloc fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Spellbook')
-			return <Spellbook data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Spellbook fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'State')
-			return <State data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <State fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'TextBox')
-			return <TextBox data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <TextBox fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Weapon')
-			return <Weapon data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Weapon fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encounter')
-			return <Encounter data={this.props.data} handleChanges={this.onChange.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+			return <Encounter fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 	}
 	
 	render() {
