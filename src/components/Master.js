@@ -23,6 +23,11 @@ class Master extends Component {
 
 	removeElement = (id) => {this.props.removeElement(id);};
 
+	close = (event) => {
+		event.stopPropagation();
+		this.props.removeElement(this.props.id);
+	};
+
 	getType() {
 		const type = this.props.type;
 		if (type === 'Background')
@@ -50,7 +55,15 @@ class Master extends Component {
 	render() {
 		
 		return (
-			<div>
+			<div className="container">
+				<div className="row">
+					<div className={"col-md-11"}>
+						<h4>{this.props.type}</h4>
+					</div>
+					<div className="col-md-1" onClick={this.close.bind(this)}>
+						&times;
+					</div>
+				</div>
 				{this.getType()}
 			</div>
 		);
