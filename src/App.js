@@ -105,7 +105,9 @@ class App extends Component {
     	let w = 20; let h = 20;
     	if (type === 'Background') {
     		w = 20; h = 11;
-		} // else if ...
+		} else if (type === 'Statbloc') {
+    		w = 20; h = 46;
+		}
         return {
             i: uuid.v4(),
             x: x, y: y,
