@@ -11,3 +11,7 @@
 .react-grid-item.react-grid-placeholder {
     background: #DE6E4B !important;
 }
+.skinny-field {
+    padding: 1px;
+    font-size: 10px;
+}

@@ -66,7 +66,6 @@ class App extends Component {
 		const d = [...this.state.dataMap.lg];
 		for (let i = 0; i < d.length; i++) {
 			const data = d[i];
-			console.log(data, newData);
 			if (data.id === newData.id) {
 				d[i].fields = newData.fields;
 			}
@@ -105,7 +104,7 @@ class App extends Component {
     	let x = 0; let y = 0;
     	let w = 20; let h = 20;
     	if (type === 'Background') {
-    		w = 20; h = 20;
+    		w = 20; h = 11;
 		} // else if ...
         return {
             i: uuid.v4(),
@@ -159,16 +158,16 @@ class App extends Component {
 				<Navbar bg={'dark'} variant={"dark"} expand="lg">
 					<Navbar.Brand href="#home">PvP (Don't Waste Paper)</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
+					<Navbar.Collapse>
 						<Nav className="mr-auto">
 							<Dropdown>
-								<Dropdown.Toggle variant="success" id="dropdown-basic">
+								<Dropdown.Toggle variant="success">
 									Add
 								</Dropdown.Toggle>
 
 								<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
 									{options.map(i=>{
-										return <Dropdown.Item value={i}  onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
+										return <Dropdown.Item value={i} key={i} onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
 									})}
 								</Dropdown.Menu>
 							</Dropdown>
