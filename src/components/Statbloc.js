@@ -5,39 +5,39 @@ import _ from "lodash";
 class Statbloc extends Component {
 	state = {
 		fields: {
-			proficiencyBonus: this.props.fields.proficiencyBonus ? this.props.fields.proficiencyBonus : '',
+			proficiencyBonus: this.props.fields.proficiencyBonus ? this.props.fields.proficiencyBonus : 2,
 
 			str: this.props.fields.str ? this.props.fields.str : 10,
-			str_saving_throws: this.props.fields.str_saving_throws ? this.props.fields.str_saving_throws : false,
-			athletics: this.props.fields.athletics ? this.props.fields.athletics : false,
+			str_saving_throws: this.props.fields.str_saving_throws,
+			athletics: this.props.fields.athletics,
 
 			dex: this.props.fields.dex ? this.props.fields.dex : 10,
-			dex_saving_throws: this.props.fields.dex_saving_throws ? this.props.fields.dex_saving_throws : false,
-			acrobatics: this.props.fields.acrobatics ? this.props.fields.acrobatics : false,
-			sleight_of_hand: this.props.fields.sleight_of_hand ? this.props.fields.sleight_of_hand : false,
-			stealth: this.props.fields.stealth ? this.props.fields.stealth : false,
+			dex_saving_throws: this.props.fields.dex_saving_throws,
+			acrobatics: this.props.fields.acrobatics,
+			sleight_of_hand: this.props.fields.sleight_of_hand,
+			stealth: this.props.fields.stealth,
 
 			con: this.props.fields.con ? this.props.fields.con : 10,
 
 			int: this.props.fields.int ? this.props.fields.int : 10,
-			arcana: this.props.fields.arcana ? this.props.fields.arcana : false,
-			history: this.props.fields.history ? this.props.fields.history : false,
-			investigation: this.props.fields.investigation ? this.props.fields.investigation : false,
-			nature: this.props.fields.nature ? this.props.fields.nature : false,
-			religion: this.props.fields.religion ? this.props.fields.religion : false,
+			arcana: this.props.fields.arcana,
+			history: this.props.fields.history,
+			investigation: this.props.fields.investigation,
+			nature: this.props.fields.nature,
+			religion: this.props.fields.religion,
 
 			wis: this.props.fields.wis ? this.props.fields.wis : 10,
-			animal_handling: this.props.fields.animal_handling ? this.props.fields.animal_handling : false,
-			insight: this.props.fields.insight ? this.props.fields.insight : false,
-			medicine: this.props.fields.medicine ? this.props.fields.medicine : false,
-			perception: this.props.fields.perception ? this.props.fields.perception : false,
-			survival: this.props.fields.survival ? this.props.fields.survival : false,
+			animal_handling: this.props.fields.animal_handling,
+			insight: this.props.fields.insight,
+			medicine: this.props.fields.medicine,
+			perception: this.props.fields.perception,
+			survival: this.props.fields.survival,
 
 			cha: this.props.fields.cha ? this.props.fields.cha : 10,
-			deception: this.props.fields.deception ? this.props.fields.deception : false,
-			intimidation: this.props.fields.intimidation ? this.props.fields.intimidation : false,
-			performance: this.props.fields.performance ? this.props.fields.performance : false,
-			persuasion: this.props.fields.persuasion ? this.props.fields.persuasion : false,
+			deception: this.props.fields.deception,
+			intimidation: this.props.fields.intimidation,
+			performance: this.props.fields.performance,
+			persuasion: this.props.fields.persuasion,
 		}
 	};
 
@@ -54,7 +54,6 @@ class Statbloc extends Component {
 	};
 
 	handleFieldChange = (event) =>{
-		console.log(event.target.value);
 		const element = event.target;
 		const ext = {...this.state.fields};
 		ext[element.title] = element.value;

@@ -104,10 +104,15 @@ class App extends Component {
     	let x = 0; let y = 0;
     	let w = 20; let h = 20;
     	if (type === 'Background') {
-    		w = 20; h = 11;
+    		w = 78; h = 9;
 		} else if (type === 'Statbloc') {
-    		w = 20; h = 46;
+    		w = 22; h = 45;
+		} else if (type === 'Personality') {
+			w = 20; h = 11;
+		} else if (type === 'State') {
+			w= 23; h = 22;
 		}
+
         return {
             i: uuid.v4(),
             x: x, y: y,

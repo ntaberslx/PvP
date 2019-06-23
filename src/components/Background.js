@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import {Row, Col} from 'react-bootstrap';
+import {Row, Col, Form} from 'react-bootstrap';
 
 class Background extends Component {
 	state = {
 		fields: {
-			traits: this.props.fields.traits ? this.props.fields.traits : '',
-			ideals: this.props.fields.ideals ? this.props.fields.ideals : '',
-			bonds: this.props.fields.bonds ? this.props.fields.bonds : '',
-			flaws: this.props.fields.flaws ? this.props.fields.flaws : ''
+			name: this.props.fields.name,
+			classes : this.props.fields.classes,
+			levels: this.props.fields.levels ? this.props.fields.levels : 0,
+			ancestry : this.props.fields.ancestry,
+			background: this.props.fields.background,
+			alignment: this.props.fields.alignment,
+			experience : this.props.fields.experience ? this.props.fields.experience : 0,
 		}
 	};
 
@@ -28,28 +31,59 @@ class Background extends Component {
 
 	render() {
 		return (
-			<Row className="row">
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'text'} className={"form-control"} placeholder={"Personality Traits"}
-						   defaultValue={this.state.fields.traits} title='traits'
-						   onChange={(e) => this.handleFieldChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'text'} className={"form-control"} placeholder={"Ideals"}
-						   defaultValue={this.state.fields.ideals} title='ideals'
-						   onChange={(e) => this.handleFieldChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'text'} className={"form-control"} placeholder={"Bonds"}
-						   defaultValue={this.state.fields.bonds} title='bonds'
-						   onChange={(e) => this.handleFieldChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'text'} className={"form-control"} placeholder={"Flaws"}
-						   defaultValue={this.state.fields.flaws} title='flaws'
-						   onChange={(e) => this.handleFieldChange(e)}/>
-				</Col>
-			</Row>
+			<Form>
+				<Row className={'right-padding'}>
+					<Col md={4} onMouseDown={(e) => e.stopPropagation()}>
+						<input type={'text'} className={"form-control"}
+							   defaultValue={this.state.fields.name} title='name'
+							   onChange={(e) => this.handleFieldChange(e)} tabIndex={1}/>
+						<Form.Label><em>Character Name</em></Form.Label>
+					</Col>
+					<Col md={8}>
+						<Row>
+							<Col md={4} onMouseDown={(e) => e.stopPropagation()}>
+								<Row>
+									<input type={'text'} className={"form-control"} placeholder={"Classes"}
+										   defaultValue={this.state.fields.classes} title='classes'
+										   onChange={(e) => this.handleFieldChange(e)} tabIndex={2}/>
+								</Row>
+								<hr className={"style-eight"}/>
+								<Row>
+									<input type={'text'} className={"form-control"} placeholder={"Experience"}
+										   defaultValue={this.state.fields.experience} title='experience'
+										   onChange={(e) => this.handleFieldChange(e)} tabIndex={5}/>
+								</Row>
+							</Col>
+							<Col md={4} onMouseDown={(e) => e.stopPropagation()}>
+								<Row>
+									<input type={'text'} className={"form-control"} placeholder={"Levels"}
+										   defaultValue={this.state.fields.levels} title='levels'
+										   onChange={(e) => this.handleFieldChange(e)} tabIndex={3}/>
+								</Row>
+								<hr className={"style-eight"}/>
+								<Row>
+									<input type={'text'} className={"form-control"} placeholder={"Character Ancestry"}
+										   defaultValue={this.state.fields.ancestry} title='ancestry'
+										   onChange={(e) => this.handleFieldChange(e)} tabIndex={6}/>
+								</Row>
+							</Col>
+							<Col md={4} onMouseDown={(e) => e.stopPropagation()}>
+								<Row>
+									<input type={'text'} className={"form-control"} placeholder={"Background"}
+										   defaultValue={this.state.fields.background} title='background'
+										   onChange={(e) => this.handleFieldChange(e)} tabIndex={4}/>
+								</Row>
+								<hr className={"style-eight"}/>
+								<Row>
+									<input type={'text'} className={"form-control"} placeholder={"Alignment"}
+										   defaultValue={this.state.fields.alignment} title='alignment'
+										   onChange={(e) => this.handleFieldChange(e)} tabIndex={7}/>
+								</Row>
+							</Col>
+						</Row>
+					</Col>
+				</Row>
+			</Form>
 		);
 	}
 }
