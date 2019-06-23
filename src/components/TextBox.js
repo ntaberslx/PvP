@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
-import Draggable from "react-draggable";
+import {Col, Row, Form} from "react-bootstrap";
 
 class TextBox extends Component {
-	onChange = (data) => {this.props.handleChanges(data);};
+	state = {
+		fields: {
+			box: this.props.fields.box
+		}
+	};
+
+	handleChanges = (fields) => {this.props.handleChanges(fields)};
+
+	handleFieldChange = (event) =>{
+		const element = event.target;
+		const ext = {...this.state.fields};
+		ext[element.title] = element.value;
+		this.handleChanges(ext);
+		this.setState(prevState => {
+				return {
+					fields: ext
+				};
+			}
+		);
+	};
 
 	render() {
 		return (
-			<Draggable>
-				<div>
-					Textbox
-				</div>
-			</Draggable>
+			<Row>
+				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
+						<Form.Control as="textarea" rows="10" title='box' defaultValue={this.state.fields.box} onChange={(e) => this.handleFieldChange(e)}/>
+				</Col>
+			</Row>
 		);
 	}
 }

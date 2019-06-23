@@ -111,6 +111,8 @@ class App extends Component {
 			w = 20; h = 11;
 		} else if (type === 'State') {
 			w= 23; h = 22;
+		} else if (type === 'TextBox') {
+    		w = 25; h = 16;
 		}
 
         return {
