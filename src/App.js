@@ -15,7 +15,7 @@ import Master from './components/Master';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const options = [
-    'Background', 'Statbloc', 'Encumbrance', 'Personality', 'Portrait',
+    'Background', 'Statbloc', 'Personality', 'Portrait',
 	'Spellbook', 'State', 'TextBox', 'Weapon', 'Encounter'
 ];
 

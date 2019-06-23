@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Background from '../components/Background';
-import Encumbrance from '../components/Encumbrance';
 import Personality from '../components/Personality';
 import Portrait from '../components/Portrait';
 import Statbloc from '../components/Statbloc';
@@ -33,8 +32,6 @@ class Master extends Component {
 		const type = this.props.type;
 		if (type === 'Background')
 			return <Background fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
-		if (type === 'Encumbrance')
-			return <Encumbrance fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Personality')
 			return <Personality fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Portrait')
