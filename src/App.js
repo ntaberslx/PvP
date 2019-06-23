@@ -113,6 +113,8 @@ class App extends Component {
 			w= 23; h = 22;
 		} else if (type === 'TextBox') {
     		w = 25; h = 16;
+		} else if (type === 'Weapon') {
+    		w = 48; h = 5;
 		}
 
         return {
