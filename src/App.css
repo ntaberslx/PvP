@@ -1,16 +1,3 @@
-.canvas {
-    border-top: solid #D1495B 5px;
-    overflow-y: hidden;
-    width: 100%;
-    height: 100vh
-}
-.react-grid-item {
-    background-color: #B26E63;
-    border: solid 1px #654C4F;
-}
-.react-grid-item.react-grid-placeholder {
-    background: #DE6E4B !important;
-}
 .proficiency-bonus{
     padding-right: 35px;
     padding-left: 35px;

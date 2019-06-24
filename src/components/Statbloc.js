@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Col, Row, InputGroup, Form} from "react-bootstrap";
 import _ from "lodash";
+import uuid from 'uuid';
 
 class Statbloc extends Component {
 	state = {
@@ -129,7 +130,7 @@ class Statbloc extends Component {
 	getStats = () => {
 		return _.map(this.stats, (statistic, index, collection)=>{
 			return (
-				<div>
+				<div key={uuid.v4()}>
 					<Row className="row">
 						<Col sm={4} onMouseDown={(e) => e.stopPropagation()} >
 							<Form.Control type="number" title={statistic.field} defaultValue={this.state.fields[statistic.field]} onChange={(e) => this.handleFieldChange(e)}/>
@@ -158,7 +159,7 @@ class Statbloc extends Component {
 	getSkills = (statistic) => {
 		return _.map(statistic.skills, (skill) => {
 			return (
-				<Row>
+				<Row key={uuid.v4()}>
 					<Col sm={8}>
 						<Form.Check label={skill.name} checked={this.state.fields[skill.field]} onChange={(e) => this.handleCheckbox(skill.field)}/>
 					</Col>

@@ -9,8 +9,11 @@ import _ from 'lodash';
 import uuid from 'uuid';
 import {Navbar, Nav, Dropdown} from 'react-bootstrap';
 import { Responsive, WidthProvider} from "react-grid-layout";
+import ReactModal from 'react-modal';
+import { SwatchesPicker } from 'react-color'
 
 import Master from './components/Master';
+import Button from "react-bootstrap/Button";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -24,11 +27,23 @@ class App extends Component {
 		super(props);
 
 		const storedData = getFromLS();
-		if (storedData.layouts && storedData.dataMap) {
-			this.state = {layouts: storedData.layouts, dataMap: storedData.dataMap};
+		if (storedData.layouts && storedData.dataMap && storedData.primaryColor) {
+			this.state = {
+				layouts: storedData.layouts,
+				dataMap: storedData.dataMap,
+				primaryColor: storedData.primaryColor,
+			};
 		} else {
-			this.state = {layouts: {lg:[]}, dataMap: {lg:[]}};
-			saveToLS({layouts: {lg:[]}, dataMap: {lg:[]}});
+			this.state = {
+				layouts: {lg:[]},
+				dataMap: {lg:[]},
+				primaryColor: '#fff'
+			};
+			saveToLS({
+				layouts: {lg:[]},
+				dataMap: {lg:[]},
+				primaryColor: '#fff'
+			});
 		}
 		this.generateDOM = this.generateDOM.bind(this);
 	}
@@ -37,8 +52,17 @@ class App extends Component {
         value: null,
         currentBreakpoint: "lg",
         compactType: "vertical",
-        mounted: false
+        mounted: false,
+		showModal: false
     };
+
+	handleOpenModal = () => {
+		this.setState({ showModal: true });
+	};
+
+	handleCloseModal = () => {
+		this.setState({ showModal: false });
+	};
 
 	getLayoutVal = (id) => {
 		for (let d of this.state.layouts.lg){
@@ -58,8 +82,13 @@ class App extends Component {
 	};
 
     onChange = (layout, layouts) => {
-		this.setState({layouts});
-		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
+		this.setState({layouts}, () => {
+			saveToLS({
+				layouts: this.state.layouts,
+				dataMap: this.state.dataMap,
+				primaryColor: this.state.primaryColor
+			});
+		});
 	};
 
     onChildDataChange = (newData) => {
@@ -71,6 +100,7 @@ class App extends Component {
 			}
 		}
 		this.setState({
+			...this.state,
 			dataMap: {
 				lg : d
 			}
@@ -97,7 +127,11 @@ class App extends Component {
 	}
 
 	componentDidUpdate() {
-		saveToLS({layouts: this.state.layouts, dataMap: this.state.dataMap});
+		saveToLS({
+			layouts: this.state.layouts,
+			dataMap: this.state.dataMap,
+			primaryColor: this.state.primaryColor
+		});
     }
 
     getNewMaster = (type) => {
@@ -142,11 +176,19 @@ class App extends Component {
 		);
 	}
 
+	handleColorChange = (color) => {
+		this.setState({
+			primaryColor: color.hex
+		}, () => {
+
+		});
+	};
+
     generateDOM(layout) {
 		return _.map(this.state.layouts.lg, (l, i) => {
 			const data = this.getDataMapVal(l.i);
 			return (
-				<div key={l.i}>
+				<div key={l.i} style={{background: this.state.primaryColor}}>
 					<Master type={data.type} fields={data.fields} id={data.id} handleChanges={this.onChildDataChange.bind(this)} removeElement={this.removeElement.bind(this)}/>
 				</div>
 			);
@@ -171,7 +213,7 @@ class App extends Component {
 				<Navbar bg={'dark'} variant={"dark"} expand="lg">
 					<Navbar.Brand href="#home">PvP (Don't Waste Paper)</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse>
+					<Navbar.Collapse  className="justify-content-end">
 						<Nav className="mr-auto">
 							<Dropdown>
 								<Dropdown.Toggle variant="success">
@@ -185,8 +227,26 @@ class App extends Component {
 								</Dropdown.Menu>
 							</Dropdown>
 						</Nav>
+						<Button variant={"dark"} onClick={this.handleOpenModal}>Settings</Button>
 					</Navbar.Collapse>
 				</Navbar>
+
+				<ReactModal
+					isOpen={this.state.showModal}
+					contentLabel="Settings"
+					style={{content : {
+							top                   : '50%',
+							left                  : '50%',
+							right                 : 'auto',
+							bottom                : 'auto',
+							marginRight           : '-50%',
+							transform             : 'translate(-50%, -50%)'
+						}}}>
+					<button onClick={this.handleCloseModal}>Close Modal</button>
+					<SwatchesPicker
+						color={this.state.primaryColor}
+						onChangeComplete={ this.handleColorChange }/>
+				</ReactModal>
 
                 <div>
                     <ResponsiveReactGridLayout
