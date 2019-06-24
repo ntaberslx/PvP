@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/PvP/static/css/main.bb667c7f.chunk.css",
+    "main.js": "/PvP/static/js/main.a255abef.chunk.js",
+    "main.js.map": "/PvP/static/js/main.a255abef.chunk.js.map",
+    "runtime~main.js": "/PvP/static/js/runtime~main.443f825d.js",
+    "runtime~main.js.map": "/PvP/static/js/runtime~main.443f825d.js.map",
+    "static/css/2.1d764ec9.chunk.css": "/PvP/static/css/2.1d764ec9.chunk.css",
+    "static/js/2.4955b59b.chunk.js": "/PvP/static/js/2.4955b59b.chunk.js",
+    "static/js/2.4955b59b.chunk.js.map": "/PvP/static/js/2.4955b59b.chunk.js.map",
+    "index.html": "/PvP/index.html",
+    "precache-manifest.1e504c865f7066cc9d216d2bdc464c95.js": "/PvP/precache-manifest.1e504c865f7066cc9d216d2bdc464c95.js",
+    "service-worker.js": "/PvP/service-worker.js",
+    "static/css/2.1d764ec9.chunk.css.map": "/PvP/static/css/2.1d764ec9.chunk.css.map",
+    "static/css/main.bb667c7f.chunk.css.map": "/PvP/static/css/main.bb667c7f.chunk.css.map",
+    "static/media/react-widgets.css": "/PvP/static/media/rw-widgets.eceddf47.ttf"
+  }
+}
