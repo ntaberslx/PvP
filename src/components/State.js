@@ -107,7 +107,7 @@ class State extends Component {
 				</Row>
 
 				<Col>
-					<InputGroup>
+					<InputGroup onMouseDown={(e) => e.stopPropagation()}>
 						<Form.Control type="number" title="hpCurrent" defaultValue={this.state.fields.hpCurrent} onChange={(e) => this.handleFieldChange(e)} id="hpCurrent"/>
 						<InputGroup.Prepend>
 							<InputGroup.Text>/</InputGroup.Text>
@@ -118,7 +118,7 @@ class State extends Component {
 				</Col>
 
 				<Col>
-					<InputGroup>
+					<InputGroup onMouseDown={(e) => e.stopPropagation()}>
 						<Form.Control type="number" title="hdCurrent" defaultValue={this.state.fields.hdCurrent} onChange={(e) => this.handleFieldChange(e)} id="hdCurrent"/>
 						<InputGroup.Prepend>
 							<InputGroup.Text>/</InputGroup.Text>
@@ -129,14 +129,14 @@ class State extends Component {
 				</Col>
 
 				<Col className="thin-border">
-					<InputGroup>
+					<InputGroup onMouseDown={(e) => e.stopPropagation()}>
 						<Form.Label><em>Successes</em></Form.Label> &nbsp;
 						<Form.Check checked={this.state.fields.deathSaves.success.one} onChange={(e) => this.handleDeathSave('s1')}/>
 						<Form.Check checked={this.state.fields.deathSaves.success.two} onChange={(e) => this.handleDeathSave('s2')}/>
 						<Form.Check checked={this.state.fields.deathSaves.success.three} onChange={(e) => this.handleDeathSave('s3')}/>
 					</InputGroup>
 
-					<InputGroup>
+					<InputGroup onMouseDown={(e) => e.stopPropagation()}>
 						<Form.Label><em>Failures</em></Form.Label> &nbsp;
 						<Form.Check checked={this.state.fields.deathSaves.failure.one} onChange={(e) => this.handleDeathSave('f1')}/>
 						<Form.Check checked={this.state.fields.deathSaves.failure.two} onChange={(e) => this.handleDeathSave('f2')}/>
@@ -148,7 +148,7 @@ class State extends Component {
 				<hr className={"style-eight"}/>
 
 				<Row>
-					<Col>
+					<Col onMouseDown={(e) => e.stopPropagation()}>
 						<Button variant="dark" onClick={this.rest}>Rest</Button>
 					</Col>
 				</Row>

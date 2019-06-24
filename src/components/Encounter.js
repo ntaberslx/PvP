@@ -125,7 +125,7 @@ class Encounter extends Component {
 					Ongoing Effects:
 				</Row>
 				{this.getEffects()}
-				<Button variant="dark" onClick={this.newEffect}>+</Button>
+				<Button variant="dark" onMouseDown={(e) => e.stopPropagation()} onClick={this.newEffect}>+</Button>
 			</div>
 		);
 	}

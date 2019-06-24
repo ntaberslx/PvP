@@ -11,6 +11,7 @@ import {Navbar, Nav, Dropdown} from 'react-bootstrap';
 import { Responsive, WidthProvider} from "react-grid-layout";
 import ReactModal from 'react-modal';
 import { SwatchesPicker } from 'react-color'
+import {Col, Row, Container} from 'react-bootstrap';
 
 import Master from './components/Master';
 import Button from "react-bootstrap/Button";
@@ -37,12 +38,12 @@ class App extends Component {
 			this.state = {
 				layouts: {lg:[]},
 				dataMap: {lg:[]},
-				primaryColor: '#fff'
+				primaryColor: '#969696'
 			};
 			saveToLS({
 				layouts: {lg:[]},
 				dataMap: {lg:[]},
-				primaryColor: '#fff'
+				primaryColor: '#969696'
 			});
 		}
 		this.generateDOM = this.generateDOM.bind(this);
@@ -242,10 +243,16 @@ class App extends Component {
 							marginRight           : '-50%',
 							transform             : 'translate(-50%, -50%)'
 						}}}>
-					<button onClick={this.handleCloseModal}>Close Modal</button>
-					<SwatchesPicker
-						color={this.state.primaryColor}
-						onChangeComplete={ this.handleColorChange }/>
+					<Container>
+						<Row>
+							<button onClick={this.handleCloseModal}>Close Modal</button>
+						</Row>
+						<Row>
+							<SwatchesPicker
+								color={this.state.primaryColor}
+								onChangeComplete={ this.handleColorChange }/>
+						</Row>
+					</Container>
 				</ReactModal>
 
                 <div>
