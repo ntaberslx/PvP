@@ -52,15 +52,10 @@ class Master extends Component {
 	
 	render() {
 		return (
-			<Container>
-				<Row>
-					<Col md={10}>
-						<h4>{this.props.type}</h4>
-					</Col>
-					<Col md={2} onClick={this.close.bind(this)}>
-						&times;
-					</Col>
-				</Row>
+			<Container className={"marginally-top"}>
+				<button type="button" className="close" aria-label="Close" onClick={this.close}>
+					<span aria-hidden="true">&times;</span>
+				</button>
 
 				{this.getType()}
 			</Container>

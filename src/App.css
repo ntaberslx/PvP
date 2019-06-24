@@ -12,6 +12,9 @@
 .marginless {
     margin: 0;
 }
+.marginally-top {
+    margin-top: 5px;
+}
 .right-padding{
     padding-right:0.2rem;
 }
