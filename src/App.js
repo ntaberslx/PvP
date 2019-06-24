@@ -115,6 +115,8 @@ class App extends Component {
     		w = 25; h = 16;
 		} else if (type === 'Weapon') {
     		w = 48; h = 5;
+		} else if (type === 'Encounter'){
+    		w = 31; h = 10;
 		}
 
         return {

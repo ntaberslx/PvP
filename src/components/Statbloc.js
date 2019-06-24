@@ -143,7 +143,7 @@ class Statbloc extends Component {
 									<Form.Check label={"Saving Throws"} checked={this.state.fields[statistic.field + '_saving_throws']} onChange={(e) => this.handleCheckbox(statistic.field + '_saving_throws')}/>
 								</Col>
 								<Col sm={4}>
-									{this.getModifier(+this.state.fields[statistic.field] + (this.state.fields[statistic.field + '_saving_throws'] ? +this.state.fields.proficiencyBonus : 0))}
+									{+this.getModifier(+this.state.fields[statistic.field]) + (this.state.fields[statistic.field + '_saving_throws'] ? +this.state.fields.proficiencyBonus : 0)}
 								</Col>
 							</Row>
 							{this.getSkills(statistic)}
@@ -163,7 +163,7 @@ class Statbloc extends Component {
 						<Form.Check label={skill.name} checked={this.state.fields[skill.field]} onChange={(e) => this.handleCheckbox(skill.field)}/>
 					</Col>
 					<Col sm={4}>
-						{this.getModifier(+this.state.fields[statistic.field] + (this.state.fields[skill.field] ? +this.state.fields.proficiencyBonus : 0))}
+						{+this.getModifier(+this.state.fields[statistic.field]) + (this.state.fields[skill.field] ? +this.state.fields.proficiencyBonus : 0)}
 					</Col>
 				</Row>
 			);
