@@ -19,8 +19,8 @@ import Button from "react-bootstrap/Button";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const options = [
-    'Background', 'Statbloc', 'Personality', 'Portrait',
-	'Spellbook', 'State', 'TextBox', 'Weapon', 'Encounter'
+    'Basics', 'Statblock', 'Personality', 'Portrait',
+	'Spellbook', 'State', 'Text Box', 'Weapon', 'Encounter'
 ];
 
 class App extends Component {
@@ -138,15 +138,15 @@ class App extends Component {
     getNewMaster = (type) => {
     	let x = 0; let y = 0;
     	let w = 20; let h = 20;
-    	if (type === 'Background') {
+    	if (type === 'Basics') {
     		w = 78; h = 9;
-		} else if (type === 'Statbloc') {
+		} else if (type === 'Statblock') {
     		w = 22; h = 45;
 		} else if (type === 'Personality') {
 			w = 20; h = 11;
 		} else if (type === 'State') {
 			w= 23; h = 22;
-		} else if (type === 'TextBox') {
+		} else if (type === 'Text Box') {
     		w = 25; h = 16;
 		} else if (type === 'Weapon') {
     		w = 48; h = 5;

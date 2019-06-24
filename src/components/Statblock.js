@@ -3,7 +3,7 @@ import {Col, Row, InputGroup, Form} from "react-bootstrap";
 import _ from "lodash";
 import uuid from 'uuid';
 
-class Statbloc extends Component {
+class Statblock extends Component {
 	state = {
 		fields: {
 			proficiencyBonus: this.props.fields.proficiencyBonus ? this.props.fields.proficiencyBonus : 2,
@@ -195,4 +195,4 @@ class Statbloc extends Component {
 	}
 }
 
-export default Statbloc;
+export default Statblock;

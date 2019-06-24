@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Background from '../components/Background';
 import Personality from '../components/Personality';
 import Portrait from '../components/Portrait';
-import Statbloc from '../components/Statbloc';
+import Statblock from '../components/Statblock';
 import Spellbook from '../components/Spellbook';
 import State from '../components/State';
 import TextBox from '../components/TextBox';
@@ -30,19 +30,19 @@ class Master extends Component {
 
 	getType() {
 		const type = this.props.type;
-		if (type === 'Background')
+		if (type === 'Basics')
 			return <Background fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Personality')
 			return <Personality fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Portrait')
 			return <Portrait fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
-		if (type === 'Statbloc')
-			return <Statbloc fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+		if (type === 'Statblock')
+			return <Statblock fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Spellbook')
 			return <Spellbook fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'State')
 			return <State fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
-		if (type === 'TextBox')
+		if (type === 'Text Box')
 			return <TextBox fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Weapon')
 			return <Weapon fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
