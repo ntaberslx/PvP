@@ -19,7 +19,7 @@ import Button from "react-bootstrap/Button";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const options = [
-    'Basics', 'Statblock', 'Personality', 'Portrait',
+    'Basics', 'Statblock', 'Personality', 'Portrait', 'Companion Statblock',
 	'Spellbook', 'State', 'Text Box', 'Weapon', 'Encounter'
 ];
 
@@ -68,7 +68,6 @@ class App extends Component {
 	getLayoutVal = (id) => {
 		for (let d of this.state.layouts.lg){
 			if (d.i === id) {
-				console.log(d);
 				return d;
 			}
 		}
@@ -152,6 +151,8 @@ class App extends Component {
     		w = 48; h = 5;
 		} else if (type === 'Encounter'){
     		w = 31; h = 10;
+		} else if (type === 'Companion Statblock'){
+			w=25; h = 30;
 		}
 
         return {

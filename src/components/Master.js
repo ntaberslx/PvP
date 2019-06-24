@@ -9,6 +9,7 @@ import State from '../components/State';
 import TextBox from '../components/TextBox';
 import Weapon from '../components/Weapon';
 import Encounter from '../components/Encounter';
+import CompanionStatblock from "./CompanionStatblock";
 import {Container, Row, Col} from 'react-bootstrap';
 
 class Master extends Component {
@@ -38,6 +39,8 @@ class Master extends Component {
 			return <Portrait fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Statblock')
 			return <Statblock fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+		if (type === 'Companion Statblock')
+			return <CompanionStatblock fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Spellbook')
 			return <Spellbook fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'State')
