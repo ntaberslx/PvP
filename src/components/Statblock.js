@@ -59,12 +59,9 @@ class Statblock extends Component {
 		const ext = {...this.state.fields};
 		ext[element.title] = element.value;
 		this.handleChanges(ext);
-		this.setState(prevState => {
-				return {
-					fields: ext
-				};
-			}
-		);
+		this.setState({
+			fields: ext
+		});
 	};
 
 	stats = [
@@ -72,6 +69,7 @@ class Statblock extends Component {
 			name : "Strength",
 			field : "str",
 			skills : [
+				{name: "Saving Throws", field: "str_saving_throws"},
 				{name: "Athletics", field: "athletics"}
 			]
 		},
@@ -79,6 +77,7 @@ class Statblock extends Component {
 			name : "Dexterity",
 			field : "dex",
 			skills : [
+				{name: "Saving Throws", field: "dex_saving_throws"},
 				{name: "Acrobatics", field: "acrobatics"},
 				{name: "Sleight Of Hand", field: "sleight_of_hand"},
 				{name: "Stealth", field: "stealth"}
@@ -87,12 +86,15 @@ class Statblock extends Component {
 		{
 			name : "Constitution",
 			field : "con",
-			skills : []
+			skills : [
+				{name: "Saving Throws", field: "con_saving_throws"},
+			]
 		},
 		{
 			name : "Intelligence",
 			field : "int",
 			skills : [
+				{name: "Saving Throws", field: "int_saving_throws"},
 				{name: "Arcana", field: "arcana"},
 				{name: "History", field: "history"},
 				{name: "Investigation", field: "investigation"},
@@ -104,6 +106,7 @@ class Statblock extends Component {
 			name : "Wisdom",
 			field: "wis",
 			skills : [
+				{name: "Saving Throws", field: "wis_saving_throws"},
 				{name: "Animal Handling", field: "animal_handling"},
 				{name: "Insight", field: "insight"},
 				{name: "Medicine", field: "medicine"},
@@ -115,6 +118,7 @@ class Statblock extends Component {
 			name : "Charisma",
 			field: "cha",
 			skills : [
+				{name: "Saving Throws", field: "cha_saving_throws"},
 				{name: "Deception", field: "deception"},
 				{name: "Intimidation", field: "intimidation"},
 				{name: "Performance", field: "performance"},
@@ -129,25 +133,21 @@ class Statblock extends Component {
 
 	getStats = () => {
 		return _.map(this.stats, (statistic, index, collection)=>{
+			const stat = this.getModifier(this.state.fields[statistic.field]);
+			const statProficient = stat+this.state.fields.proficiencyBonus;
 			return (
 				<div key={uuid.v4()}>
 					<Row className="row">
-						<Col sm={4} onMouseDown={(e) => e.stopPropagation()} >
-							<Form.Control type="number" title={statistic.field} defaultValue={this.state.fields[statistic.field]} onChange={(e) => this.handleFieldChange(e)}/>
-							<div className={"center"}><h1 className={"marginless"}>{this.getModifier(this.state.fields[statistic.field])}</h1></div>
+						<Col sm={4} onMouseDown={(e) => e.stopPropagation()}>
+							<input type={'number'} className={"form-control"}
+								   defaultValue={this.state.fields[statistic.field]} title={statistic.field}
+								   onChange={(e) => this.handleFieldChange(e)}/>
+							<div className={"center"}><h1 className={"marginless"}>{stat}</h1></div>
 							<Form.Label className={"center"}><em>{statistic.name}</em></Form.Label>
 						</Col>
 
 						<Col sm={8} onMouseDown={(e) => e.stopPropagation()}>
-							<Row>
-								<Col sm={8}>
-									<Form.Check label={"Saving Throws"} checked={this.state.fields[statistic.field + '_saving_throws']} onChange={(e) => this.handleCheckbox(statistic.field + '_saving_throws')}/>
-								</Col>
-								<Col sm={4}>
-									{+this.getModifier(+this.state.fields[statistic.field]) + (this.state.fields[statistic.field + '_saving_throws'] ? +this.state.fields.proficiencyBonus : 0)}
-								</Col>
-							</Row>
-							{this.getSkills(statistic)}
+							{this.getSkills(statistic, stat, statProficient)}
 						</Col>
 					</Row>
 					<hr className={"style-seven"} hidden={index === collection.length - 1}/>
@@ -156,7 +156,7 @@ class Statblock extends Component {
 		});
 	};
 
-	getSkills = (statistic) => {
+	getSkills = (statistic, mod, statProficient) => {
 		return _.map(statistic.skills, (skill) => {
 			return (
 				<Row key={uuid.v4()}>
@@ -164,7 +164,7 @@ class Statblock extends Component {
 						<Form.Check label={skill.name} checked={this.state.fields[skill.field]} onChange={(e) => this.handleCheckbox(skill.field)}/>
 					</Col>
 					<Col sm={4}>
-						{+this.getModifier(+this.state.fields[statistic.field]) + (this.state.fields[skill.field] ? +this.state.fields.proficiencyBonus : 0)}
+						{this.state.fields[skill.field] ? statProficient : mod}
 					</Col>
 				</Row>
 			);

@@ -10,6 +10,7 @@ import TextBox from '../components/TextBox';
 import Weapon from '../components/Weapon';
 import Encounter from '../components/Encounter';
 import CompanionStatblock from "./CompanionStatblock";
+import CoinPouch from './CoinPouch';
 import {Container, Row, Col} from 'react-bootstrap';
 
 class Master extends Component {
@@ -47,6 +48,8 @@ class Master extends Component {
 			return <State fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Text Box')
 			return <TextBox fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+		if (type === 'Coin Pouch')
+			return <CoinPouch fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Weapon')
 			return <Weapon fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encounter')

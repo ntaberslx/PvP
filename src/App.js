@@ -20,7 +20,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const options = [
     'Basics', 'Statblock', 'Personality', 'Portrait', 'Companion Statblock',
-	'Spellbook', 'State', 'Text Box', 'Weapon', 'Encounter'
+	'Spellbook', 'State', 'Text Box', 'Coin Pouch', 'Weapon', 'Encounter'
 ];
 
 class App extends Component {
@@ -152,7 +152,9 @@ class App extends Component {
 		} else if (type === 'Encounter'){
     		w = 31; h = 10;
 		} else if (type === 'Companion Statblock'){
-			w=25; h = 30;
+			w = 25; h = 30;
+		} else if (type === 'Coin Pouch') {
+    		w = 15; h = 14;
 		}
 
         return {

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {Col, Row, InputGroup, Form} from "react-bootstrap";
-import _ from "lodash";
-import uuid from 'uuid';
 
 class Statblock extends Component {
 	state = {
