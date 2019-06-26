@@ -45,31 +45,56 @@ class CoinPouch extends Component {
 	render() {
 		return (
 			<Row>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'number'} className={"form-control"} placeholder={"Copper"}
-						   defaultValue={this.state.fields.copper} title='copper'
-						   onChange={(e) => this.handleCurrencyChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'number'} className={"form-control"} placeholder={"Silver"}
-						   defaultValue={this.state.fields.silver} title='silver'
-						   onChange={(e) => this.handleCurrencyChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'number'} className={"form-control"} placeholder={"Electrum"}
-						   defaultValue={this.state.fields.electrum} title='electrum'
-						   onChange={(e) => this.handleCurrencyChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'number'} className={"form-control"} placeholder={"Gold"}
-						   defaultValue={this.state.fields.gold} title='gold'
-						   onChange={(e) => this.handleCurrencyChange(e)}/>
-				</Col>
-				<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
-					<input type={'number'} className={"form-control"} placeholder={"Platinum"}
-						   defaultValue={this.state.fields.platinum} title='platinum'
-						   onChange={(e) => this.handleCurrencyChange(e)}/>
-				</Col>
+				<Row onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={2}>
+						<img src={process.env.PUBLIC_URL + '/copper.png'} height={"35px"} width={"35px"} />
+					</Col>
+					<Col md={10}>
+						<input type={'number'} className={"form-control"} placeholder={"Copper"}
+							   defaultValue={this.state.fields.copper} title='copper'
+							   onChange={(e) => this.handleCurrencyChange(e)}/>
+					</Col>
+				</Row>
+				<Row onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={2}>
+						<img src={process.env.PUBLIC_URL + '/silver.png'} height={"35px"} width={"35px"} />
+					</Col>
+					<Col md={10}>
+						<input type={'number'} className={"form-control"} placeholder={"Silver"}
+							   defaultValue={this.state.fields.silver} title='silver'
+							   onChange={(e) => this.handleCurrencyChange(e)}/>
+					</Col>
+				</Row>
+				<Row onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={2}>
+						<img src={process.env.PUBLIC_URL + '/electrum.png'} height={"35px"} width={"35px"} />
+					</Col>
+					<Col md={10}>
+						<input type={'number'} className={"form-control"} placeholder={"Electrum"}
+							   defaultValue={this.state.fields.electrum} title='electrum'
+							   onChange={(e) => this.handleCurrencyChange(e)}/>
+					</Col>
+				</Row>
+				<Row  onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={2}>
+						<img src={process.env.PUBLIC_URL + '/gold.png'} height={"35px"} width={"35px"} />
+					</Col>
+					<Col md={10}>
+						<input type={'number'} className={"form-control"} placeholder={"Gold"}
+							   defaultValue={this.state.fields.gold} title='gold'
+							   onChange={(e) => this.handleCurrencyChange(e)}/>
+					</Col>
+				</Row>
+				<Row onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={2}>
+						<img src={process.env.PUBLIC_URL + '/platinum.png'} height={"35px"} width={"35px"} />
+					</Col>
+					<Col md={10}>
+						<input type={'number'} className={"form-control"} placeholder={"Platinum"}
+							   defaultValue={this.state.fields.platinum} title='platinum'
+							   onChange={(e) => this.handleCurrencyChange(e)}/>
+					</Col>
+				</Row>
 				<Col>
 					<Button variant={"dark"} onClick={this.handleOpenModal}>Exchange Rates</Button>
 				</Col>

@@ -133,7 +133,7 @@ class Statblock extends Component {
 
 	getStats = () => {
 		return _.map(this.stats, (statistic, index, collection)=>{
-			const stat = this.getModifier(this.state.fields[statistic.field]);
+			const stat = +this.getModifier(this.state.fields[statistic.field]);
 			const statProficient = stat+this.state.fields.proficiencyBonus;
 			return (
 				<div key={uuid.v4()}>
