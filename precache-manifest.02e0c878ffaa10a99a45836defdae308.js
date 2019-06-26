@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "989ac7eb0dacfeb2a5c506ca496cbce4",
+    "revision": "a0b58a216deceeb244ebbf49b01326f2",
     "url": "/PvP/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PvP/static/css/2.58f0bfe7.chunk.css"
   },
   {
-    "revision": "f83f179c6e9a65ae1346",
+    "revision": "67fa8fed75e616ba1309",
     "url": "/PvP/static/css/main.bb667c7f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PvP/static/js/2.97da7202.chunk.js"
   },
   {
-    "revision": "f83f179c6e9a65ae1346",
-    "url": "/PvP/static/js/main.2f179080.chunk.js"
+    "revision": "67fa8fed75e616ba1309",
+    "url": "/PvP/static/js/main.ff0d0e31.chunk.js"
   },
   {
     "revision": "f5d82d1b22ff919d4ae6",
