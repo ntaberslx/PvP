@@ -26,6 +26,15 @@
     border: 1px solid;
     border-radius: 16px;
 }
+.dot-menu-holder {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.dot-menu:after {
+    content: '\2807';
+    font-size: 1.3em;
+    color: #fe5f55
+}
 
 /* Glyph, by Harry Roberts */
 hr.style-eight {

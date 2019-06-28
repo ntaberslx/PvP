@@ -99,27 +99,20 @@ class App extends Component {
 				d[i].fields = newData.fields;
 			}
 		}
+		let update = this.state.dataMap;
+		update.lg = d;
 		this.setState({
-			...this.state,
-			dataMap: {
-				lg : d
-			}
+			dataMap: update
 		});
 	};
 
 	removeElement = (id) => {
-    	for (let i = 0; i < this.state.layouts.lg.length; i++) {
-    		const item = this.getLayoutVal(id);
-    		if (item) {
-				this.setState(prevState => {
-					return {
-						layouts: {
-							lg : [...prevState.layouts.lg.filter(({ i }) => i !== item.i)]
-						}
-					};
-				});
+		let removedItem = this.state.layouts.lg.filter(i=>i.i !== id);
+		this.setState({
+			layouts: {
+				lg : removedItem
 			}
-		}
+		});
 	};
 
     componentDidMount() {
@@ -154,7 +147,7 @@ class App extends Component {
 		} else if (type === 'Companion Statblock'){
 			w = 25; h = 30;
 		} else if (type === 'Coin Pouch') {
-    		w = 15; h = 14;
+    		w = 18; h = 13;
 		}
 
         return {
@@ -180,11 +173,43 @@ class App extends Component {
 		);
 	}
 
+	reviveComponent = (comp) => {
+		const master = this.getNewMaster(comp.type);
+		master.i = comp.id;
+		this.setState({
+			layouts: {
+				'Main Layout': [...this.state.layouts.lg, master]
+			}
+		})
+	};
+
+	killComponent = (id)=>{
+		let removedItem = this.state.dataMap.lg.filter(i=>i.id !== id);
+		this.setState({
+			dataMap: {
+				'Main Layout' : removedItem
+			}
+		});
+	};
+
 	handleColorChange = (color) => {
 		this.setState({
 			primaryColor: color.hex
 		}, () => {
 
+		});
+	};
+
+	getTrashCan = () => {
+		return _.map(this.state.dataMap.lg, (v)=>{
+			if (!this.state.layouts.lg.some((x)=> {return x.i === v.id;})){
+				return <Dropdown.Item value={v.type} key={v.id} onClick={e => this.reviveComponent(v)}>
+					{v.type}
+					<button onMouseDown={(e) => e.stopPropagation()} type="button" className="btn close" aria-label="Close" onClick={(e)=>{e.stopPropagation();this.killComponent(v.id);}}>
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</Dropdown.Item>
+			}
 		});
 	};
 
@@ -219,25 +244,40 @@ class App extends Component {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse  className="justify-content-end">
 						<Nav className="mr-auto">
-							<Dropdown>
-								<Dropdown.Toggle variant="success">
-									Add
-								</Dropdown.Toggle>
+							<div className={'four-padding'}>
 
-								<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
-									{options.map(i=>{
-										return <Dropdown.Item value={i} key={i} onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
-									})}
-								</Dropdown.Menu>
-							</Dropdown>
+								<Dropdown>
+									<Dropdown.Toggle variant="success">
+										Add
+									</Dropdown.Toggle>
+
+									<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
+										{options.map(i=>{
+											return <Dropdown.Item value={i} key={i} onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
+										})}
+									</Dropdown.Menu>
+								</Dropdown>
+							</div>
+							<div className={'four-padding'}>
+								<Dropdown>
+									<Dropdown.Toggle variant="success">
+										Restore
+									</Dropdown.Toggle>
+
+									<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
+										{this.getTrashCan()}
+									</Dropdown.Menu>
+								</Dropdown>
+
+							</div>
 						</Nav>
-						<Button variant={"dark"} onClick={this.handleOpenModal}>Settings</Button>
+						<Button variant={"dark"} onClick={this.handleOpenModal} className={'dot-menu-holder'}><div className={'dot-menu'}/> </Button>
 					</Navbar.Collapse>
 				</Navbar>
 
 				<ReactModal
 					isOpen={this.state.showModal}
-					contentLabel="Settings"
+					contentLabel='...'
 					style={{content : {
 							top                   : '50%',
 							left                  : '50%',
@@ -247,13 +287,19 @@ class App extends Component {
 							transform             : 'translate(-50%, -50%)'
 						}}}>
 					<Container>
-						<Row>
-							<button onClick={this.handleCloseModal}>Close Modal</button>
-						</Row>
+						<Row><Col>
+								<h2>System Color</h2>
+						</Col></Row>
 						<Row>
 							<SwatchesPicker
 								color={this.state.primaryColor}
 								onChangeComplete={ this.handleColorChange }/>
+						</Row>
+						<Row><Col>
+							<h2>Layout</h2>
+						</Col></Row>
+						<Row>
+							<button onClick={this.handleCloseModal}>Close</button>
 						</Row>
 					</Container>
 				</ReactModal>
@@ -267,7 +313,7 @@ class App extends Component {
                         onLayoutChange={this.onChange}
                         compactType={null}>
 
-                        {this.generateDOM("lg")}
+                        {this.generateDOM('lg')}
 
                     </ResponsiveReactGridLayout>
                 </div>

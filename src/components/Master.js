@@ -11,7 +11,7 @@ import Weapon from '../components/Weapon';
 import Encounter from '../components/Encounter';
 import CompanionStatblock from "./CompanionStatblock";
 import CoinPouch from './CoinPouch';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 
 class Master extends Component {
 	handleChanges = (fields) => {
