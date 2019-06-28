@@ -28,37 +28,48 @@ class App extends Component {
 		super(props);
 
 		const storedData = getFromLS();
-		if (storedData.layouts && storedData.dataMap && storedData.primaryColor && storedData.currentLayout) {
-			this.state = {
-				layouts: storedData.layouts,
-				dataMap: storedData.dataMap,
-				primaryColor: storedData.primaryColor,
-				currentLayout: storedData.currentLayout
-			};
-		} else {
-			this.state = {
-				layouts: {lg:[]},
-				dataMap: {lg:[]},
-				primaryColor: '#969696',
-				currentLayout: 'Main Layout'
-			};
+
+		this.state = {
+			layouts: storedData.layouts ? storedData.layouts : {lg:[]},
+			dataMap: storedData.dataMap ? storedData.dataMap : {lg:[]},
+			primaryColor: storedData.primaryColor ? storedData.primaryColor : '#969696',
+			currentLayout: storedData.currentLayout ? storedData.currentLayout : 'Main Layout',
+			layoutMap: storedData.layoutMap? storedData.layoutMap : {'Main Layout': []}
+		};
+		if (!(storedData.layouts && storedData.dataMap && storedData.primaryColor && storedData.currentLayout)){
 			saveToLS({
-				layouts: {lg:[]},
-				dataMap: {lg:[]},
-				primaryColor: '#969696',
-				currentLayout: 'Main Layout'
+				layouts: storedData.layouts ? storedData.layouts : {lg:[]},
+				dataMap: storedData.dataMap ? storedData.dataMap : {lg:[]},
+				primaryColor: storedData.primaryColor ? storedData.primaryColor : '#969696',
+				currentLayout: storedData.currentLayout ? storedData.currentLayout : 'Main Layout',
+				layoutMap: storedData.layoutMap? storedData.layoutMap : {'Main Layout': []}
 			});
 		}
+
 		this.generateDOM = this.generateDOM.bind(this);
 	}
 
     state = {
-        value: null,
+        nameInput: null,
         currentBreakpoint: "lg",
         compactType: "vertical",
         mounted: false,
 		showModal: false
     };
+
+	componentDidMount() {
+		document.title = "PvP";
+	}
+
+	componentDidUpdate() {
+		saveToLS({
+			layouts: this.state.layouts,
+			dataMap: this.state.dataMap,
+			primaryColor: this.state.primaryColor,
+			currentLayout: this.state.currentLayout,
+			layoutMap: this.state.layoutMap
+		});
+	}
 
 	handleOpenModal = () => {
 		this.setState({ showModal: true });
@@ -90,7 +101,8 @@ class App extends Component {
 				layouts: this.state.layouts,
 				dataMap: this.state.dataMap,
 				primaryColor: this.state.primaryColor,
-				currentLayout: this.state.currentLayout
+				currentLayout: this.state.currentLayout,
+				layoutMap: this.state.layoutMap
 			});
 		});
 	};
@@ -118,19 +130,6 @@ class App extends Component {
 			}
 		});
 	};
-
-    componentDidMount() {
-		document.title = "PvP";
-	}
-
-	componentDidUpdate() {
-		saveToLS({
-			layouts: this.state.layouts,
-			dataMap: this.state.dataMap,
-			primaryColor: this.state.primaryColor,
-			currentLayout: this.state.currentLayout
-		});
-    }
 
     getNewMaster = (type) => {
     	let x = 0; let y = 0;
@@ -172,7 +171,8 @@ class App extends Component {
 				lg: [...this.state.dataMap.lg, {
 					fields: {},
 					type: value,
-					id: master.i
+					id: master.i,
+					layout: this.state.currentLayout
 				}]
 			}}
 		);
@@ -206,8 +206,8 @@ class App extends Component {
 	};
 
 	getTrashCan = () => {
-		return _.map(this.state.dataMap.lg, (v)=>{
-			if (this.state.layouts.lg && !this.state.layouts.lg.some((x)=> {return x.i === v.id;})){
+		return _.map(this.getCurrentLayout(), (v)=>{
+			if (!this.state.layouts.lg.some((x)=> {return x.i === v.id;})){
 				return <Dropdown.Item value={v.type} key={v.id} onClick={e => this.reviveComponent(v)}>
 					{v.type}
 					<button onMouseDown={(e) => e.stopPropagation()} type="button" className="btn close" aria-label="Close" onClick={(e)=>{e.stopPropagation();this.killComponent(v.id);}}>
@@ -218,8 +218,34 @@ class App extends Component {
 		});
 	};
 
+	newLayout = (name) => {
+		let layouts = this.state.layoutMap;
+		layouts[name] = [];
+		this.setState({
+			layoutMap: layouts
+		}, ()=>{this.handleLayoutChange(name)})
+	};
+
+	handleLayoutChange = (layoutName) => {
+		//snapshot layouts and add to data
+		let LayoutSnapshot = this.state.layoutMap;
+		LayoutSnapshot[this.state.currentLayout] = this.state.layouts.lg;
+
+		this.setState({
+			layoutMap : LayoutSnapshot
+			},
+			()=>{
+				this.setState({
+					layouts: {
+						lg: this.state.layoutMap[layoutName]
+					},
+					currentLayout : layoutName
+				})
+			});
+	};
+
     generateDOM(layout) {
-		return _.map(this.state.layouts.lg, (l, i) => {
+		return _.map(this.getCurrentLayout(), (l, i) => {
 			const data = this.getDataMapVal(l.i);
 			return (
 				<div key={l.i} style={{background: this.state.primaryColor}}>
@@ -228,6 +254,12 @@ class App extends Component {
 			);
 		});
     }
+
+    getCurrentLayout = () => {
+    	return this.state.layouts.lg.filter(e => {
+    		return this.getDataMapVal(e.i).layout === this.state.currentLayout;
+		})
+	};
 
     render() {
         return (
@@ -303,6 +335,22 @@ class App extends Component {
 						<Row><Col>
 							<h2>Layout</h2>
 						</Col></Row>
+						<Row>
+							<Dropdown>
+								<Dropdown.Toggle variant="success" id="dropdown-basic">
+									{this.state.currentLayout}
+								</Dropdown.Toggle>
+								<Dropdown.Menu>
+									{_.map(Object.keys(this.state.layoutMap), l => {
+										return <Dropdown.Item onClick={() => this.handleLayoutChange(l)}>{l}</Dropdown.Item>
+									})}
+								</Dropdown.Menu>
+							</Dropdown>
+						</Row>
+						<Row>
+							<input value={this.state.nameInput} onChange={e => {this.setState({nameInput : e.target.value})}}/>
+							<button onClick={e=> {this.newLayout(this.state.nameInput)}}>+</button>
+						</Row>
 						<Row>
 							<button onClick={this.handleCloseModal}>Close</button>
 						</Row>
