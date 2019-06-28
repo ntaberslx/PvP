@@ -12,6 +12,8 @@ import Encounter from '../components/Encounter';
 import CompanionStatblock from "./CompanionStatblock";
 import CoinPouch from './CoinPouch';
 import Skills from './Skills';
+import Actions from './Actions';
+import Conditions from './Conditions';
 
 import {Container} from 'react-bootstrap';
 
@@ -57,7 +59,11 @@ class Master extends Component {
 		if (type === 'Encounter')
 			return <Encounter fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Skills')
-			return <Skills/>
+			return <Skills/>;
+		if (type === 'Actions')
+			return <Actions/>;
+		if (type === 'Conditions')
+			return <Conditions/>;
 	}
 	
 	render() {

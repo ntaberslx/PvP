@@ -24,7 +24,7 @@ const options = [
 ];
 
 const staticOptions = [
-	'Skills',
+	'Actions', 'Conditions', 'Skills',
 ];
 
 class App extends Component {
