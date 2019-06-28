@@ -206,7 +206,7 @@ class App extends Component {
 	};
 
 	getTrashCan = () => {
-		return _.map(this.getCurrentLayout(), (v)=>{
+		return _.map(this.getCurrentDataMap(), (v)=>{
 			if (!this.state.layouts.lg.some((x)=> {return x.i === v.id;})){
 				return <Dropdown.Item value={v.type} key={v.id} onClick={e => this.reviveComponent(v)}>
 					{v.type}
@@ -254,6 +254,12 @@ class App extends Component {
 			);
 		});
     }
+
+	getCurrentDataMap = () => {
+		return this.state.dataMap.lg.filter(e => {
+			return e.layout === this.state.currentLayout;
+		})
+	};
 
     getCurrentLayout = () => {
     	return this.state.layouts.lg.filter(e => {
