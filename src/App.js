@@ -23,6 +23,10 @@ const options = [
 	'Spellbook', 'State', 'Text Box', 'Coin Pouch', 'Weapon', 'Encounter'
 ];
 
+const staticOptions = [
+	'Skills',
+];
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -295,7 +299,13 @@ class App extends Component {
 									</Dropdown.Toggle>
 
 									<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
+										<Dropdown.Header>Player Components</Dropdown.Header>
 										{options.map(i=>{
+											return <Dropdown.Item value={i} key={i} onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
+										})}
+										<Dropdown.Divider />
+										<Dropdown.Header>Reference Components</Dropdown.Header>
+										{staticOptions.map(i=>{
 											return <Dropdown.Item value={i} key={i} onClick={e => this.addComponent(i)}>{i}</Dropdown.Item>
 										})}
 									</Dropdown.Menu>

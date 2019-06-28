@@ -11,6 +11,8 @@ import Weapon from '../components/Weapon';
 import Encounter from '../components/Encounter';
 import CompanionStatblock from "./CompanionStatblock";
 import CoinPouch from './CoinPouch';
+import Skills from './Skills';
+
 import {Container} from 'react-bootstrap';
 
 class Master extends Component {
@@ -54,6 +56,8 @@ class Master extends Component {
 			return <Weapon fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encounter')
 			return <Encounter fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+		if (type === 'Skills')
+			return <Skills/>
 	}
 	
 	render() {
