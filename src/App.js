@@ -28,22 +28,25 @@ class App extends Component {
 		super(props);
 
 		const storedData = getFromLS();
-		if (storedData.layouts && storedData.dataMap && storedData.primaryColor) {
+		if (storedData.layouts && storedData.dataMap && storedData.primaryColor && storedData.currentLayout) {
 			this.state = {
 				layouts: storedData.layouts,
 				dataMap: storedData.dataMap,
 				primaryColor: storedData.primaryColor,
+				currentLayout: storedData.currentLayout
 			};
 		} else {
 			this.state = {
 				layouts: {lg:[]},
 				dataMap: {lg:[]},
-				primaryColor: '#969696'
+				primaryColor: '#969696',
+				currentLayout: 'Main Layout'
 			};
 			saveToLS({
 				layouts: {lg:[]},
 				dataMap: {lg:[]},
-				primaryColor: '#969696'
+				primaryColor: '#969696',
+				currentLayout: 'Main Layout'
 			});
 		}
 		this.generateDOM = this.generateDOM.bind(this);
@@ -86,7 +89,8 @@ class App extends Component {
 			saveToLS({
 				layouts: this.state.layouts,
 				dataMap: this.state.dataMap,
-				primaryColor: this.state.primaryColor
+				primaryColor: this.state.primaryColor,
+				currentLayout: this.state.currentLayout
 			});
 		});
 	};
@@ -123,7 +127,8 @@ class App extends Component {
 		saveToLS({
 			layouts: this.state.layouts,
 			dataMap: this.state.dataMap,
-			primaryColor: this.state.primaryColor
+			primaryColor: this.state.primaryColor,
+			currentLayout: this.state.currentLayout
 		});
     }
 
@@ -178,7 +183,7 @@ class App extends Component {
 		master.i = comp.id;
 		this.setState({
 			layouts: {
-				'Main Layout': [...this.state.layouts.lg, master]
+				lg: [...this.state.layouts.lg, master]
 			}
 		})
 	};
@@ -187,7 +192,7 @@ class App extends Component {
 		let removedItem = this.state.dataMap.lg.filter(i=>i.id !== id);
 		this.setState({
 			dataMap: {
-				'Main Layout' : removedItem
+				lg : removedItem
 			}
 		});
 	};
@@ -202,7 +207,7 @@ class App extends Component {
 
 	getTrashCan = () => {
 		return _.map(this.state.dataMap.lg, (v)=>{
-			if (!this.state.layouts.lg.some((x)=> {return x.i === v.id;})){
+			if (this.state.layouts.lg && !this.state.layouts.lg.some((x)=> {return x.i === v.id;})){
 				return <Dropdown.Item value={v.type} key={v.id} onClick={e => this.reviveComponent(v)}>
 					{v.type}
 					<button onMouseDown={(e) => e.stopPropagation()} type="button" className="btn close" aria-label="Close" onClick={(e)=>{e.stopPropagation();this.killComponent(v.id);}}>
