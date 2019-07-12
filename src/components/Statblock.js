@@ -137,7 +137,7 @@ class Statblock extends Component {
 			const statProficient = stat+this.state.fields.proficiencyBonus;
 			return (
 				<div key={uuid.v4()}>
-					<Row className="row">
+					<Row>
 						<Col sm={4} onMouseDown={(e) => e.stopPropagation()}>
 							<input type={'number'} className={"form-control"}
 								   defaultValue={this.state.fields[statistic.field]} title={statistic.field}

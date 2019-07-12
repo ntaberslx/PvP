@@ -100,15 +100,7 @@ class App extends Component {
 	};
 
     onChange = (layout, layouts) => {
-		this.setState({layouts}, () => {
-			saveToLS({
-				layouts: this.state.layouts,
-				dataMap: this.state.dataMap,
-				primaryColor: this.state.primaryColor,
-				currentLayout: this.state.currentLayout,
-				layoutMap: this.state.layoutMap
-			});
-		});
+		this.setState({layouts});
 	};
 
     onChildDataChange = (newData) => {
