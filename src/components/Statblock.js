@@ -19,8 +19,10 @@ class Statblock extends Component {
 			stealth: this.props.fields.stealth,
 
 			con: this.props.fields.con ? this.props.fields.con : 10,
+			con_saving_throws: this.props.fields.con_saving_throws,
 
 			int: this.props.fields.int ? this.props.fields.int : 10,
+			int_saving_throws: this.props.fields.int_saving_throws,
 			arcana: this.props.fields.arcana,
 			history: this.props.fields.history,
 			investigation: this.props.fields.investigation,
@@ -28,6 +30,7 @@ class Statblock extends Component {
 			religion: this.props.fields.religion,
 
 			wis: this.props.fields.wis ? this.props.fields.wis : 10,
+			wis_saving_throws: this.props.fields.wis_saving_throws,
 			animal_handling: this.props.fields.animal_handling,
 			insight: this.props.fields.insight,
 			medicine: this.props.fields.medicine,
@@ -35,6 +38,7 @@ class Statblock extends Component {
 			survival: this.props.fields.survival,
 
 			cha: this.props.fields.cha ? this.props.fields.cha : 10,
+			cha_saving_throws: this.props.fields.cha_saving_throws,
 			deception: this.props.fields.deception,
 			intimidation: this.props.fields.intimidation,
 			performance: this.props.fields.performance,
