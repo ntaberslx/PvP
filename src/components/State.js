@@ -6,6 +6,7 @@ class State extends Component {
 		fields: {
 			armorClass: this.props.fields.armorClass ? this.props.fields.armorClass : 10,
 			initiative: this.props.fields.initiative ? this.props.fields.initiative : 0,
+			inspiration: this.props.fields.inspiration,
 			speed: this.props.fields.speed ? this.props.fields.speed : 30,
 			hpMax: this.props.fields.hpMax ? this.props.fields.hpMax : 0,
 			hpCurrent: this.props.fields.hpCurrent ? this.props.fields.hpCurrent : 0,
@@ -49,6 +50,16 @@ class State extends Component {
 		);
 	};
 
+	handleCheckbox = (box) => {
+		const event = {
+			target: {
+				title: box,
+				value: !this.state.fields[box]
+			}
+		};
+		this.handleFieldChange(event);
+	};
+
 	handleFieldChange = (event) =>{
 		const element = event.target;
 		const ext = {...this.state.fields};
@@ -86,23 +97,32 @@ class State extends Component {
 		return (
 			<div>
 				<Row>
-					<Col md={4} className={"right-padding"} onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={4} className={"four-padding"} onMouseDown={(e) => e.stopPropagation()}>
 						<input type={'number'} className={"form-control"}
 							   defaultValue={this.state.fields.armorClass} title='armorClass'
 							   onChange={(e) => this.handleFieldChange(e)}/>
 						<Form.Label className={"center"}><em>A.C.</em></Form.Label>
 					</Col>
-					<Col md={4} className={"right-padding"} onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={4} className={"four-padding"} onMouseDown={(e) => e.stopPropagation()}>
 						<input type={'number'} className={"form-control"}
 							   defaultValue={this.state.fields.initiative} title='initiative'
 							   onChange={(e) => this.handleFieldChange(e)}/>
 						<Form.Label className={"center"}><em>Initiative</em></Form.Label>
 					</Col>
-					<Col md={4} onMouseDown={(e) => e.stopPropagation()}>
+					<Col md={4} className={"four-padding"} onMouseDown={(e) => e.stopPropagation()}>
 						<input type={'number'} className={"form-control"}
 							   defaultValue={this.state.fields.speed} title='speed'
 							   onChange={(e) => this.handleFieldChange(e)}/>
 						<Form.Label className={"center"}><em>Speed</em></Form.Label>
+					</Col>
+				</Row>
+
+				<Row onMouseDown={(e) => e.stopPropagation()}>
+					<Col>
+						<Form.Label><em>Inspiration</em></Form.Label>
+					</Col>
+					<Col>
+						<Form.Check className={"larger-checkbox"} checked={this.state.fields.inspiration} onChange={(e)=>this.handleCheckbox('inspiration')}/>
 					</Col>
 				</Row>
 
@@ -148,8 +168,8 @@ class State extends Component {
 				<hr className={"style-eight"}/>
 
 				<Row>
-					<Col onMouseDown={(e) => e.stopPropagation()}>
-						<Button variant="dark" onClick={this.rest}>Rest</Button>
+					<Col className={"text-center"} onMouseDown={(e) => e.stopPropagation()}>
+						<Button variant="dark" onClick={this.rest}>Reset</Button>
 					</Col>
 				</Row>
 
