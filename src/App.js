@@ -7,11 +7,10 @@ import 'react-resizable/css/styles.css';
 
 import _ from 'lodash';
 import uuid from 'uuid';
-import {Navbar, Nav, Dropdown} from 'react-bootstrap';
+import {Navbar, Nav, Dropdown, InputGroup, Form} from 'react-bootstrap';
 import { Responsive, WidthProvider} from "react-grid-layout";
-import ReactModal from 'react-modal';
-import { SwatchesPicker } from 'react-color'
-import {Col, Row, Container} from 'react-bootstrap';
+import { CirclePicker } from 'react-color';
+import {Col, Row, Container, Modal} from 'react-bootstrap';
 
 import Master from './components/Master';
 import Button from "react-bootstrap/Button";
@@ -99,7 +98,7 @@ class App extends Component {
 		}
 	};
 
-    onChange = (layout, layouts) => {
+    onLayoutChange = (layout, layouts) => {
 		this.setState({layouts});
 	};
 
@@ -217,11 +216,24 @@ class App extends Component {
 	};
 
 	newLayout = (name) => {
+		if (name !== '' && name !== undefined && name !== null && !this.state.layoutMap[name]){
+			let layouts = this.state.layoutMap;
+			layouts[name] = [];
+			this.setState({
+				layoutMap: layouts
+			}, ()=>{this.handleLayoutChange(name)})
+		}
+	};
+
+	removeLayout = (name) => {
 		let layouts = this.state.layoutMap;
-		layouts[name] = [];
+		delete layouts[name];
 		this.setState({
-			layoutMap: layouts
-		}, ()=>{this.handleLayoutChange(name)})
+			layoutMap: layouts,
+			currentLayout: 'Main Layout'
+		}, ()=>{
+			this.handleLayoutChange('Main Layout');
+		})
 	};
 
 	handleLayoutChange = (layoutName) => {
@@ -322,57 +334,95 @@ class App extends Component {
 					</Navbar.Collapse>
 				</Navbar>
 
-				<ReactModal
-					isOpen={this.state.showModal}
-					contentLabel='...'
-					style={{content : {
-							top                   : '50%',
-							left                  : '50%',
-							right                 : 'auto',
-							bottom                : 'auto',
-							marginRight           : '-50%',
-							transform             : 'translate(-50%, -50%)'
-						}}}>
-					<Container>
-						<Row><Col>
-								<h2>System Color</h2>
-						</Col></Row>
-						<Row>
-							<SwatchesPicker
-								color={this.state.primaryColor}
-								onChangeComplete={ this.handleColorChange }/>
-						</Row>
-						<Row><Col>
-							<h2>Layout</h2>
-						</Col></Row>
-						<Row>
-							<Dropdown>
-								<Dropdown.Toggle variant="success" id="dropdown-basic">
-									{this.state.currentLayout}
-								</Dropdown.Toggle>
-								<Dropdown.Menu>
-									{_.map(Object.keys(this.state.layoutMap), l => {
-										return <Dropdown.Item key={uuid.v4()} onClick={() => this.handleLayoutChange(l)}>{l}</Dropdown.Item>
-									})}
-								</Dropdown.Menu>
-							</Dropdown>
-						</Row>
-						<Row>
-							<input value={this.state.nameInput} onChange={e => {this.setState({nameInput : e.target.value})}}/>
-							<button onClick={e=> {this.newLayout(this.state.nameInput)}}>+</button>
-						</Row>
-						<Row>
-							<button onClick={this.handleCloseModal}>Close</button>
-						</Row>
-					</Container>
-				</ReactModal>
+				<Modal show={this.state.showModal} onHide={this.handleCloseModal}>
+					<Modal.Header closeButton>
+						<Modal.Title>Settings</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Container>
+							<Row>
+								<Col className={'four-padding'}>
+									<Row><Col>
+										<h4>System Color</h4>
+									</Col></Row>
+									<Row className={'marginally-top'}>
+										<Col className={'text-center'}>
+											<CirclePicker
+												color={this.state.primaryColor}
+												onChangeComplete={ this.handleColorChange }
+												circleSize={50}
+												width={null}
+												colors={["#FB7A71", "#f44336", "#e91e63", "#B459C3",
+													"#9c27b0", "#673ab7", "#3f51b5", "#2196f3",
+													"#03a9f4", "#00bcd4", "#009688", "#4caf50",
+													"#8bc34a", "#cddc39", "#ffeb3b", "#ffc107",
+													"#ff9800", "#ff5722", "#E2C6C6", "#795548",
+													"#607d8b"]}/>
+										</Col>
+									</Row>
+								</Col>
+							</Row>
+							<hr className={'style-eight'}/>
+							<Row>
+								<Col className={'four-padding'}>
+									<Row><Col>
+										<h4>Layout</h4>
+									</Col></Row>
+									<Row className={'marginally-top'}>
+										<Col sm={6}>
+											<h5>Add New Layout:</h5>
+										</Col>
+										<Col sm={6}>
+											<InputGroup size='md' >
+
+												<Form.Control type="text" onChange={e => {this.setState({nameInput : e.target.value})}}
+															  title="New Layout Name" value={this.state.nameInput}/>
+												<InputGroup.Append>
+													<Button variant={'dark'} onClick={e=> {this.newLayout(this.state.nameInput)}}>+</Button>
+												</InputGroup.Append>
+											</InputGroup>
+										</Col>
+									</Row>
+									<Row className={'marginally-top'}>
+										<Col sm={6}>
+											<h5>Current Layout:</h5>
+										</Col>
+										<Col sm={6}>
+											<Dropdown>
+												<Dropdown.Toggle variant="dark" id="dropdown-basic">
+													{this.state.currentLayout}
+												</Dropdown.Toggle>
+												<Dropdown.Menu>
+													{_.map(Object.keys(this.state.layoutMap), l => {
+														return <Dropdown.Item key={uuid.v4()} onClick={() => this.handleLayoutChange(l)}>
+															{l}
+															<button hidden={l === 'Main Layout'} onMouseDown={(e) => e.stopPropagation()} type="button" className="btn close" aria-label="Delete Layout" onClick={(e)=>{e.stopPropagation();this.removeLayout(l);}}>
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</Dropdown.Item>
+													})}
+												</Dropdown.Menu>
+											</Dropdown>
+										</Col>
+									</Row>
+								</Col>
+							</Row>
+						</Container>
+					</Modal.Body>
+
+					<Modal.Footer>
+						<Button variant="dark" onClick={this.handleCloseModal}>
+							Close
+						</Button>
+					</Modal.Footer>
+				</Modal>
 
                 <div>
                     <ResponsiveReactGridLayout
                         layouts={this.state.layouts}
 						cols={{ lg: 100, md: 10, sm: 6, xs: 4, xxs: 2 }}
 						rowHeight={10}
-                        onLayoutChange={this.onChange}
+                        onLayoutChange={_.debounce(this.onLayoutChange, 100)}
                         compactType={'vertical'}>
 
                         {this.generateDOM('lg')}
