@@ -20,7 +20,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const options = [
     'Basics', 'Statblock', 'Personality', 'Portrait', 'Companion Statblock',
-	'Spellbook', 'State', 'Text Box', 'Coin Pouch', 'Weapon', 'Encounter'
+	'Spellbook', 'Spellcasting', 'State', 'Text Box', 'Coin Pouch', 'Weapon', 'Encounter'
 ];
 
 const staticOptions = [
@@ -148,6 +148,8 @@ class App extends Component {
 			w = 25; h = 30;
 		} else if (type === 'Coin Pouch') {
     		w = 18; h = 13;
+		} else if (type === 'Spellcasting') {
+    		w = 30; h = 27;
 		}
 
         return {
@@ -370,9 +372,8 @@ class App extends Component {
                         layouts={this.state.layouts}
 						cols={{ lg: 100, md: 10, sm: 6, xs: 4, xxs: 2 }}
 						rowHeight={10}
-						preventCollision={true}
                         onLayoutChange={this.onChange}
-                        compactType={null}>
+                        compactType={'vertical'}>
 
                         {this.generateDOM('lg')}
 

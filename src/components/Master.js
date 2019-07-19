@@ -14,6 +14,7 @@ import CoinPouch from './CoinPouch';
 import Skills from './Skills';
 import Actions from './Actions';
 import Conditions from './Conditions';
+import Spellcasting from './Spellcasting';
 
 import {Container} from 'react-bootstrap';
 
@@ -58,6 +59,8 @@ class Master extends Component {
 			return <Weapon fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Encounter')
 			return <Encounter fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+		if (type === 'Spellcasting')
+			return <Spellcasting fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Skills')
 			return <Skills/>;
 		if (type === 'Actions')
