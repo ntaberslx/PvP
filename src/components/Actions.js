@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Col, Row, Table} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 
 class Actions extends Component {
 

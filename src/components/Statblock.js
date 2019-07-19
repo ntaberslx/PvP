@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Col, Row, InputGroup, Form} from "react-bootstrap";
 import _ from "lodash";
-import uuid from 'uuid';
 
 class Statblock extends Component {
 	state = {
@@ -138,9 +137,9 @@ class Statblock extends Component {
 	getStats = () => {
 		return _.map(this.stats, (statistic, index, collection)=>{
 			const stat = +this.getModifier(this.state.fields[statistic.field]);
-			const statProficient = stat+this.state.fields.proficiencyBonus;
+			const statProficient = stat + (+this.state.fields.proficiencyBonus);
 			return (
-				<div key={uuid.v4()}>
+				<div key={index}>
 					<Row>
 						<Col sm={4} onMouseDown={(e) => e.stopPropagation()}>
 							<input type={'number'} className={"form-control"}
@@ -163,7 +162,7 @@ class Statblock extends Component {
 	getSkills = (statistic, mod, statProficient) => {
 		return _.map(statistic.skills, (skill) => {
 			return (
-				<Row key={uuid.v4()}>
+				<Row key={statistic.name+'/'+skill.name}>
 					<Col sm={8}>
 						<Form.Check label={skill.name} checked={this.state.fields[skill.field]} onChange={(e) => this.handleCheckbox(skill.field)}/>
 					</Col>
@@ -177,7 +176,7 @@ class Statblock extends Component {
 
 	render() {
 		return (
-			<Form>
+			<div>
 				<Row className={"proficiency-bonus"}>
 					<Col md={12} onMouseDown={(e) => e.stopPropagation()}>
 						<InputGroup size='sm' >
@@ -194,7 +193,7 @@ class Statblock extends Component {
 
 				{this.getStats()}
 
-			</Form>
+			</div>
 		);
 	}
 }

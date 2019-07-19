@@ -352,7 +352,7 @@ class App extends Component {
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
 									{_.map(Object.keys(this.state.layoutMap), l => {
-										return <Dropdown.Item onClick={() => this.handleLayoutChange(l)}>{l}</Dropdown.Item>
+										return <Dropdown.Item key={uuid.v4()} onClick={() => this.handleLayoutChange(l)}>{l}</Dropdown.Item>
 									})}
 								</Dropdown.Menu>
 							</Dropdown>
