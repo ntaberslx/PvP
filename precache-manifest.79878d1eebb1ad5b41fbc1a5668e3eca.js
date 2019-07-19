@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6a8fa5ede9930518b95ef8901c98c7aa",
+    "revision": "63ebeae3d71ee1b6e8c6de9a1f53120b",
     "url": "/PvP/index.html"
   },
   {
-    "revision": "1a448c9b33ccae2cb0e4",
-    "url": "/PvP/static/css/2.8191b9ba.chunk.css"
+    "revision": "50d7c7bb186e00972b69",
+    "url": "/PvP/static/css/2.1d764ec9.chunk.css"
   },
   {
-    "revision": "f621832191189ed8d80d",
+    "revision": "c3c821024f3fde3abe8a",
     "url": "/PvP/static/css/main.92f883f6.chunk.css"
   },
   {
-    "revision": "1a448c9b33ccae2cb0e4",
-    "url": "/PvP/static/js/2.f0e94c7b.chunk.js"
+    "revision": "50d7c7bb186e00972b69",
+    "url": "/PvP/static/js/2.97319ca0.chunk.js"
   },
   {
-    "revision": "f621832191189ed8d80d",
-    "url": "/PvP/static/js/main.acd5b987.chunk.js"
+    "revision": "c3c821024f3fde3abe8a",
+    "url": "/PvP/static/js/main.495e468d.chunk.js"
   },
   {
     "revision": "f5d82d1b22ff919d4ae6",
