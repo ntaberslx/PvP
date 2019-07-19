@@ -130,154 +130,154 @@ class Spellcasting extends Component {
 						<tr>
 							<td>First</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelOneCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelOneCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelOneCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelOneCurrent'}>
 									{this.state.fields.levelOneCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelOne}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelOne', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelOne', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelOne', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelOne', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Second</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelTwoCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelTwoCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelTwoCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelTwoCurrent'}>
 									{this.state.fields.levelTwoCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelTwo}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelTwo', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelTwo', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelTwo', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelTwo', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Third</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelThreeCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelThreeCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelThreeCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelThreeCurrent'}>
 									{this.state.fields.levelThreeCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelThree}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelThree', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelThree', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelThree', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelThree', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Fourth</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelFourCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelFourCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelFourCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelFourCurrent'}>
 									{this.state.fields.levelFourCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelFour}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelFour', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelFour', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelFour', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelFour', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Fifth</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelFiveCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelFiveCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelFiveCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelFiveCurrent'}>
 									{this.state.fields.levelFiveCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelFive}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelFive', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelFive', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelFive', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelFive', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Sixth</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelSixCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelSixCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelSixCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelSixCurrent'}>
 									{this.state.fields.levelSixCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelSix}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelSix', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelSix', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelSix', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelSix', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Seventh</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelSevenCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelSevenCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelSevenCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelSevenCurrent'}>
 									{this.state.fields.levelSevenCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelSeven}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelSeven', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelSeven', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelSeven', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelSeven', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Eighth</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelEightCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelEightCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelEightCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelEightCurrent'}>
 									{this.state.fields.levelEightCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelEight}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelEight', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelEight', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelEight', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelEight', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						<tr>
 							<td>Ninth</td>
 							<td>
-								<button onClick={(e)=>this.decrement('levelNineCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelNineCurrent'}>
+								<Button variant="dark" onClick={(e)=>this.decrement('levelNineCurrent')} onMouseDown={(e) => e.stopPropagation()} id={'levelNineCurrent'}>
 									{this.state.fields.levelNineCurrent}
-								</button>
+								</Button>
 							</td>
 							<td>{this.state.fields.levelNine}</td>
 							<td onMouseDown={(e) => e.stopPropagation()}>
-								<button onClick={(e) => this.handleSlots('levelNine', 1)}>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelNine', 1)}>
 									/\
-								</button>
-								<button onClick={(e) => this.handleSlots('levelNine', -1)} >
+								</Button>
+								<Button variant="dark" onClick={(e) => this.handleSlots('levelNine', -1)} >
 									\/
-								</button>
+								</Button>
 							</td>
 						</tr>
 						</tbody>
