@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/PvP/static/css/main.e2e07708.chunk.css",
-    "main.js": "/PvP/static/js/main.a08002b9.chunk.js",
-    "main.js.map": "/PvP/static/js/main.a08002b9.chunk.js.map",
+    "main.css": "/PvP/static/css/main.92f883f6.chunk.css",
+    "main.js": "/PvP/static/js/main.acd5b987.chunk.js",
+    "main.js.map": "/PvP/static/js/main.acd5b987.chunk.js.map",
     "runtime~main.js": "/PvP/static/js/runtime~main.443f825d.js",
     "runtime~main.js.map": "/PvP/static/js/runtime~main.443f825d.js.map",
     "static/css/2.8191b9ba.chunk.css": "/PvP/static/css/2.8191b9ba.chunk.css",
-    "static/js/2.79fce4bb.chunk.js": "/PvP/static/js/2.79fce4bb.chunk.js",
-    "static/js/2.79fce4bb.chunk.js.map": "/PvP/static/js/2.79fce4bb.chunk.js.map",
+    "static/js/2.f0e94c7b.chunk.js": "/PvP/static/js/2.f0e94c7b.chunk.js",
+    "static/js/2.f0e94c7b.chunk.js.map": "/PvP/static/js/2.f0e94c7b.chunk.js.map",
     "index.html": "/PvP/index.html",
-    "precache-manifest.72ea3566d687cfb854e2a0d3ca2074ec.js": "/PvP/precache-manifest.72ea3566d687cfb854e2a0d3ca2074ec.js",
+    "precache-manifest.3f6cde54203f3529850f7e1cbd9a84dd.js": "/PvP/precache-manifest.3f6cde54203f3529850f7e1cbd9a84dd.js",
     "service-worker.js": "/PvP/service-worker.js",
     "static/css/2.8191b9ba.chunk.css.map": "/PvP/static/css/2.8191b9ba.chunk.css.map",
-    "static/css/main.e2e07708.chunk.css.map": "/PvP/static/css/main.e2e07708.chunk.css.map",
+    "static/css/main.92f883f6.chunk.css.map": "/PvP/static/css/main.92f883f6.chunk.css.map",
     "static/media/react-widgets.css": "/PvP/static/media/rw-widgets.eceddf47.ttf"
   }
 }
