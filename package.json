@@ -1,15 +1,40 @@
 {
   "name": "PvP",
   "version": "1.0.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "lodash": "latest",
     "react": "latest",
-    "react-dom": "latest",
     "react-bootstrap": "^1.0.0-beta.10",
+    "react-color": "^2.17.3",
+    "react-dom": "latest",
+    "react-grid-layout": "^0.16.6",
+    "react-modal": "^3.9.1",
+    "react-widgets": "^5.0.0-7",
     "uuid": "latest"
   },
+  "homepage": "https://ntaberslx.github.io/PvP/",
   "devDependencies": {
-    "react-color": "^2.17.3",
-    "react-grid-layout": "^0.16.6"
+    "react-scripts": "^3.0.1",
+    "gh-pages": "^2.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
