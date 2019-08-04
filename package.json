@@ -1,6 +1,9 @@
 {
   "name": "PvP",
   "version": "1.0.0",
+  "description": "Don't Waste Paper",
+  "repository": "https://github.com/ntaberslx/PvP",
+  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "npm run build",
@@ -10,7 +13,12 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
+    "@fortawesome/free-solid-svg-icons": "^5.10.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "lodash": "latest",
+    "pretty-checkbox": "^3.0.3",
     "react": "latest",
     "react-bootstrap": "^1.0.0-beta.10",
     "react-color": "^2.17.3",

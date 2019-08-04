@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {Button, Col, Row, Form, InputGroup} from "react-bootstrap";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSkull, faHeartbeat, faDiceD20 } from '@fortawesome/free-solid-svg-icons'
+
 class State extends Component {
 	state = {
 		fields: {
@@ -119,10 +122,19 @@ class State extends Component {
 
 				<Row onMouseDown={(e) => e.stopPropagation()}>
 					<Col>
-						<Form.Label><em>Inspiration</em></Form.Label>
-					</Col>
-					<Col>
-						<Form.Check className={"larger-checkbox"} checked={this.state.fields.inspiration} onChange={(e)=>this.handleCheckbox('inspiration')}/>
+						<Row className={'text-center'}>
+							<Col>
+								<div className="pretty p-icon p-smooth" style={{"fontSize": "2.5em", "marginRight":"10px"}}>
+									<input type="checkbox" checked={this.state.fields.inspiration} onChange={(e)=>this.handleCheckbox('inspiration')}/>
+									<div className="state">
+										<i className="icon">
+											<FontAwesomeIcon icon={faDiceD20} size={"sm"} transform={"up-2.5"} color={"#f7be16"}/>
+										</i>
+										<label>Inspiration</label>
+									</div>
+								</div>
+							</Col>
+						</Row>
 					</Col>
 				</Row>
 
@@ -148,22 +160,75 @@ class State extends Component {
 					<Form.Label><em>Hit Die (Current / Max)</em></Form.Label>
 				</Col>
 
-				<Col className="thin-border">
-					<InputGroup onMouseDown={(e) => e.stopPropagation()}>
-						<Form.Label><em>Successes</em></Form.Label> &nbsp;
-						<Form.Check checked={this.state.fields.deathSaves.success.one} onChange={(e) => this.handleDeathSave('s1')}/>
-						<Form.Check checked={this.state.fields.deathSaves.success.two} onChange={(e) => this.handleDeathSave('s2')}/>
-						<Form.Check checked={this.state.fields.deathSaves.success.three} onChange={(e) => this.handleDeathSave('s3')}/>
-					</InputGroup>
+				<Col className="thin-border text-center">
+					<Row><Col>
+						<Form.Label><em>Death Saves</em></Form.Label> &nbsp;
+					</Col></Row>
 
-					<InputGroup onMouseDown={(e) => e.stopPropagation()}>
-						<Form.Label><em>Failures</em></Form.Label> &nbsp;
-						<Form.Check checked={this.state.fields.deathSaves.failure.one} onChange={(e) => this.handleDeathSave('f1')}/>
-						<Form.Check checked={this.state.fields.deathSaves.failure.two} onChange={(e) => this.handleDeathSave('f2')}/>
-						<Form.Check checked={this.state.fields.deathSaves.failure.three} onChange={(e) => this.handleDeathSave('f3')}/>
-					</InputGroup>
+					<Row><Col>
+						<InputGroup onMouseDown={(e) => e.stopPropagation()} className={'pull-center'}>
+							<Form.Label title={"Successes"}>Pass: </Form.Label> &nbsp;
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+								<input type="checkbox" checked={this.state.fields.deathSaves.success.one} onChange={(e) => this.handleDeathSave('s1')}/>
+								<div className="state">
+									<i className="icon">
+										<FontAwesomeIcon icon={faHeartbeat} size={"sm"} transform={"up-2.5"} color={"#fabc74"}/>
+									</i>
+									<label/>
+								</div>
+							</div>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+								<input type="checkbox" checked={this.state.fields.deathSaves.success.two} onChange={(e) => this.handleDeathSave('s2')}/>
+								<div className="state">
+									<i className="icon">
+										<FontAwesomeIcon icon={faHeartbeat} size={"sm"} transform={"up-2.5"} color={"#afa939"}/>
+									</i>
+									<label/>
+								</div>
+							</div>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+								<input type="checkbox" checked={this.state.fields.deathSaves.success.three} onChange={(e) => this.handleDeathSave('s3')}/>
+								<div className="state">
+									<i className="icon">
+										<FontAwesomeIcon icon={faHeartbeat} size={"sm"} transform={"up-2.5"} color={"#2b580c"}/>
+									</i>
+									<label/>
+								</div>
+							</div>
+						</InputGroup></Col>
+						<Col>
+						<InputGroup onMouseDown={(e) => e.stopPropagation()}>
+							<Form.Label title={"Failures"}>Fail</Form.Label> &nbsp;
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+								<input type="checkbox" checked={this.state.fields.deathSaves.failure.one} onChange={(e) => this.handleDeathSave('f1')}/>
+								<div className="state">
+									<i className="icon">
+										<FontAwesomeIcon icon={faSkull} size={"sm"} transform={"up-2.5"} color={"#fabc74"}/>
+									</i>
+									<label/>
+								</div>
+							</div>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+								<input type="checkbox" checked={this.state.fields.deathSaves.failure.two} onChange={(e) => this.handleDeathSave('f2')}/>
+								<div className="state">
+									<i className="icon">
+										<FontAwesomeIcon icon={faSkull} size={"sm"} transform={"up-2.5"} color={"#ff0000"}/>
+									</i>
+									<label/>
+								</div>
+							</div>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+								<input type="checkbox" checked={this.state.fields.deathSaves.failure.three} onChange={(e) => this.handleDeathSave('f3')}/>
+								<div className="state">
+									<i className="icon">
+										<FontAwesomeIcon icon={faSkull} size={"sm"} transform={"up-2.5"} color={"#252525"}/>
+									</i>
+									<label/>
+								</div>
+							</div>
+						</InputGroup>
+					</Col></Row>
 
-					<Form.Label><em>Death Saves</em></Form.Label> &nbsp;
 				</Col>
 				<hr className={"style-eight"}/>
 

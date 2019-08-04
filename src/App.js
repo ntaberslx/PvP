@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
+import 'pretty-checkbox/dist/pretty-checkbox.min.css';
 import 'react-widgets/dist/css/react-widgets.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
