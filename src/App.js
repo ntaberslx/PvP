@@ -324,7 +324,7 @@ class App extends Component {
 									</Dropdown.Toggle>
 
 									<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
-										{this.getTrashCan()}
+										{this.getTrashCan}
 									</Dropdown.Menu>
 								</Dropdown>
 
@@ -422,7 +422,7 @@ class App extends Component {
                         layouts={this.state.layouts}
 						cols={{ lg: 100, md: 10, sm: 6, xs: 4, xxs: 2 }}
 						rowHeight={10}
-                        onLayoutChange={_.debounce(this.onLayoutChange, 100)}
+                        onLayoutChange={this.onLayoutChange}
                         compactType={'vertical'}>
 
                         {this.generateDOM('lg')}
