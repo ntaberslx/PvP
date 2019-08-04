@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Col, InputGroup, Row} from "react-bootstrap";
 import * as _ from "lodash";
+import PieChart from 'react-minimal-pie-chart';
 
 class Encounter extends Component {
 	state = {
@@ -32,7 +33,7 @@ class Encounter extends Component {
 			effects : [
 				...this.state.fields.effects,
 				{
-					name: '', duration: 0, type: '', target: '', isPassed: false
+					name: '', duration: 0, target: '', isPassed: false
 				}
 			]
 		};
@@ -87,11 +88,8 @@ class Encounter extends Component {
 							<input type={'text'} className={"form-control"} placeholder={"Name"}
 								   defaultValue={this.state.fields.effects[index].name} title={index + '-name'}
 								   onChange={(e) => this.handleFieldChange(e)}/>
-							<input type={'number'} className={"form-control"} placeholder={"Duration"}
+							<input type={'number'} className={"form-control"} placeholder={"Duration (rounds)"}
 								   defaultValue={this.state.fields.effects[index].duration} title={index + '-duration'} id={index}
-								   onChange={(e) => this.handleFieldChange(e)}/>
-							<input type={'text'} className={"form-control"} placeholder={"Type"}
-								   defaultValue={this.state.fields.effects[index].type} title={index + '-type'}
 								   onChange={(e) => this.handleFieldChange(e)}/>
 							<input type={'text'} className={"form-control"} placeholder={"Target"}
 								   defaultValue={this.state.fields.effects[index].target} title={index + '-target'}
@@ -103,23 +101,41 @@ class Encounter extends Component {
 		});
 	};
 
+	getLabel = () => {
+		let minutes = 0, seconds = this.state.fields.turns * 6, labelString = '';
+		while (seconds >= 60){
+			minutes += 1;
+			seconds += -60;
+		}
+		labelString = minutes === 0 ? seconds + 's' : minutes + 'm' + seconds + 's';
+		return labelString;
+	};
+
 	render() {
 		return (
 			<div>
 				<Row>
-					<Col sm={4} onMouseDown={(e) => e.stopPropagation()}>
-						<Button variant="dark" onClick={this.newEncounter}>Reset</Button>
+					<Col sm={6} onMouseDown={(e) => e.stopPropagation()}>
+						<Row className={"text-center"}><Col>
+							<Button variant="dark" onClick={this.newEncounter}>Reset</Button>
+						</Col></Row>
+							<hr className={'style-eight'}/>
+						<Row className={"text-center"}><Col>
+							<Button variant="dark" onClick={this.advance}>Turn {this.state.fields.turns}</Button>
+						</Col></Row>
 					</Col>
-					<Col sm={2}>
-						<h1>{this.state.fields.turns}</h1>
-					</Col>
-					<Col sm={2}>
-						<h4 className={'center'}>{this.state.fields.turns * 6}</h4>
-						<h6>seconds</h6>
-					</Col>
-					<Col sm={4} onMouseDown={(e) => e.stopPropagation()}>
-						<Button variant="dark" onClick={this.advance}>Turn</Button>
-					</Col>
+					<PieChart
+						label={this.getLabel}
+						labelPosition={0}
+						totalValue={600}
+						background={'#fff1c1'}
+						startAngle={-90}
+						style={ { "width":"9rem", "height": "9rem" } }
+						data={[
+							{ value: ((this.state.fields.turns * 6) % 60) * 10 - 1, color: '#f76262'},
+							{ value: 1, color: '#263859'}
+						]}
+					/>
 				</Row>
 				<Row>
 					Ongoing Effects:

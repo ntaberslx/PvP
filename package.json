@@ -16,6 +16,7 @@
     "react-color": "^2.17.3",
     "react-dom": "latest",
     "react-grid-layout": "^0.16.6",
+    "react-minimal-pie-chart": "^5.0.0",
     "react-modal": "^3.9.1",
     "react-widgets": "^5.0.0-7",
     "uuid": "latest"

@@ -324,7 +324,7 @@ class App extends Component {
 									</Dropdown.Toggle>
 
 									<Dropdown.Menu  onChange={e => this.addComponent(e.target.value)}>
-										{this.getTrashCan}
+										{this.getTrashCan()}
 									</Dropdown.Menu>
 								</Dropdown>
 
