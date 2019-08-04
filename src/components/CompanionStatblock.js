@@ -8,7 +8,7 @@ class Statblock extends Component {
 			type: this.props.fields.type,
 			armorClass: this.props.fields.armorClass,
 			speed: this.props.fields.speed,
-			hpCurrent: this.props.fields.hpCurrent,
+			cHpCurrent: this.props.fields.cHpCurrent,
 			hpMax: this.props.fields.hpMax,
 			skills: this.props.fields.skills,
 			senses: this.props.fields.senses,
@@ -72,7 +72,7 @@ class Statblock extends Component {
 				<Row>
 					<Col>
 						<InputGroup onMouseDown={(e) => e.stopPropagation()}>
-							<Form.Control type="number" title="hpCurrent" defaultValue={this.state.fields.hpCurrent} onChange={(e) => this.handleFieldChange(e)} id="hpCurrent"/>
+							<Form.Control type="number" title="cHpCurrent" defaultValue={this.state.fields.cHpCurrent} onChange={(e) => this.handleFieldChange(e)}/>
 							<InputGroup.Prepend>
 								<InputGroup.Text>/</InputGroup.Text>
 							</InputGroup.Prepend>
