@@ -165,10 +165,18 @@ class State extends Component {
 						<Form.Label><em>Death Saves</em></Form.Label> &nbsp;
 					</Col></Row>
 
-					<Row><Col>
+					<Row>
+						<Col>
+							<Form.Label title={"Successes"}>Successes: </Form.Label> &nbsp;
+						</Col>
+						<Col>
+							<Form.Label title={"Failures"}>Failures: </Form.Label> &nbsp;
+						</Col>
+					</Row>
+					<Row>
+						<Col>
 						<InputGroup onMouseDown={(e) => e.stopPropagation()} className={'pull-center'}>
-							<Form.Label title={"Successes"}>Pass: </Form.Label> &nbsp;
-							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"2px"}}>
 								<input type="checkbox" checked={this.state.fields.deathSaves.success.one} onChange={(e) => this.handleDeathSave('s1')}/>
 								<div className="state">
 									<i className="icon">
@@ -177,7 +185,7 @@ class State extends Component {
 									<label/>
 								</div>
 							</div>
-							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"2px"}}>
 								<input type="checkbox" checked={this.state.fields.deathSaves.success.two} onChange={(e) => this.handleDeathSave('s2')}/>
 								<div className="state">
 									<i className="icon">
@@ -186,7 +194,7 @@ class State extends Component {
 									<label/>
 								</div>
 							</div>
-							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"0"}}>
 								<input type="checkbox" checked={this.state.fields.deathSaves.success.three} onChange={(e) => this.handleDeathSave('s3')}/>
 								<div className="state">
 									<i className="icon">
@@ -198,8 +206,7 @@ class State extends Component {
 						</InputGroup></Col>
 						<Col>
 						<InputGroup onMouseDown={(e) => e.stopPropagation()}>
-							<Form.Label title={"Failures"}>Fail</Form.Label> &nbsp;
-							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"2px"}}>
 								<input type="checkbox" checked={this.state.fields.deathSaves.failure.one} onChange={(e) => this.handleDeathSave('f1')}/>
 								<div className="state">
 									<i className="icon">
@@ -208,7 +215,7 @@ class State extends Component {
 									<label/>
 								</div>
 							</div>
-							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"2px"}}>
 								<input type="checkbox" checked={this.state.fields.deathSaves.failure.two} onChange={(e) => this.handleDeathSave('f2')}/>
 								<div className="state">
 									<i className="icon">
@@ -217,7 +224,7 @@ class State extends Component {
 									<label/>
 								</div>
 							</div>
-							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"10px"}}>
+							<div className="pretty p-icon p-smooth" style={{"fontSize": "2em", "marginRight":"0"}}>
 								<input type="checkbox" checked={this.state.fields.deathSaves.failure.three} onChange={(e) => this.handleDeathSave('f3')}/>
 								<div className="state">
 									<i className="icon">

@@ -6,10 +6,10 @@
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build --git git",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -31,8 +31,8 @@
   },
   "homepage": "https://ntaberslx.github.io/PvP/",
   "devDependencies": {
-    "react-scripts": "^3.0.1",
-    "gh-pages": "^2.1.0"
+    "gh-pages": "latest",
+    "react-scripts": "^3.0.1"
   },
   "browserslist": {
     "production": [
