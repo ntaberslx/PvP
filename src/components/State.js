@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Col, Row, Form, InputGroup} from "react-bootstrap";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSkull, faHeartbeat, faDiceD20 } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSkull, faHeartbeat, faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 
 class State extends Component {
 	state = {
