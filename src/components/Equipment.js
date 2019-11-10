@@ -27,7 +27,7 @@ class Equipment extends Component {
 					key: uuid.v4()
 				},
 				{
-					name: 'in rucksack',
+					name: 'In Rucksack',
 					things: [
 						{
 							name: 'Rations',
