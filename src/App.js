@@ -19,7 +19,7 @@ import Button from "react-bootstrap/Button";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const options = [
-    'Basics', 'Statblock', 'Personality', 'Portrait', 'Companion Statblock',
+    'Basics', 'Statblock', 'Equipment', 'Personality', 'Portrait', 'Companion Statblock',
 	'Spellbook', 'Spellcasting', 'State', 'Text Box', 'Coin Pouch', 'Weapon', 'Encounter'
 ];
 
@@ -198,8 +198,6 @@ class App extends Component {
 	handleColorChange = (color) => {
 		this.setState({
 			primaryColor: color.hex
-		}, () => {
-
 		});
 	};
 

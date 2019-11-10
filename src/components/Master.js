@@ -15,6 +15,7 @@ import Skills from './Skills';
 import Actions from './Actions';
 import Conditions from './Conditions';
 import Spellcasting from './Spellcasting';
+import Equipment from "./Equipment";
 
 import {Container} from 'react-bootstrap';
 
@@ -61,6 +62,9 @@ class Master extends Component {
 			return <Encounter fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
 		if (type === 'Spellcasting')
 			return <Spellcasting fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+		if (type === 'Equipment')
+			return <Equipment fields={this.props.fields} handleChanges={this.handleChanges.bind(this)} removeElement={this.removeElement.bind(this)}/>;
+
 		if (type === 'Skills')
 			return <Skills/>;
 		if (type === 'Actions')
